@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'AnticSlab';
+	src: url('../fonts/Antic_Slab/AnticSlab-Regular.ttf');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'PassionOne';
+	src: url('../fonts/Passion_One/PassionOne-Regular.ttf');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Prociono';
+	src: url('../fonts/Prociono/Prociono-Regular.ttf');
+	font-style: normal;
+}
