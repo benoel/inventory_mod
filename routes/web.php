@@ -16,3 +16,7 @@
 // });
 
 Route::get('/', 'HomeController@index');
+Route::get('/product', 'HomeController@index');
+Route::get('/supplier', 'HomeController@index');
+Route::get('/costumer', 'HomeController@index');
+Route::get('/category', 'HomeController@index');
