@@ -16,7 +16,16 @@
 // });
 
 Route::get('/', 'HomeController@index');
-Route::get('/product', 'HomeController@index');
+
+
+Route::get('/product', 'ProductController@view');
+Route::get('/product/create', 'ProductController@create');
+Route::post('/product', 'ProductController@store');
+Route::get('/product/{id}/edit', 'ProductController@edit');
+Route::put('/product/{id}/', 'ProductController@update');
+Route::get('/product/{id}/delete', 'ProductController@delete');
+
+
 Route::get('/supplier', 'HomeController@index');
 Route::get('/costumer', 'HomeController@index');
 Route::get('/category', 'HomeController@index');
