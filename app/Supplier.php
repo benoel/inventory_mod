@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Supplier extends Model
 {
-  public function purchases()
-  {
-    return $this->hasMany('App\Purchase');
-  }
+	protected $guarded = [];
+	public function purchase()
+	{
+		return $this->hasMany('App\Purchase');
+	}
 }

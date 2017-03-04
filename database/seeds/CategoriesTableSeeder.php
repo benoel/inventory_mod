@@ -18,7 +18,7 @@ class CategoriesTableSeeder extends Seeder
         foreach ((range(1, 50)) as $index) {
           DB::table('categories')->insert([
             'name' => $faker->colorName()
-          ]);
-        }
-    }
+            ]);
+      }
+  }
 }

@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-  public function category()
-  {
-    return $this->belongsTo('App\Category');
-  }
+	protected $guarded = [];
+	public function category()
+	{
+		return $this->belongsTo('App\Category');
+	}
 
-  public function purchasedetails()
-  {
-    return $this->hasMany('App\PurchaseDetail');
-  }
+	public function purchasedetails()
+	{
+		return $this->hasMany('App\PurchaseDetail');
+	}
 
-  public function saledetails()
-  {
-    return $this->hasMany('App\SaleDetail');
-  }
+	public function saledetails()
+	{
+		return $this->hasMany('App\SaleDetail');
+	}
 }
