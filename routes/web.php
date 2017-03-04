@@ -17,6 +17,12 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/supplier', 'SupplierController@view');
+Route::get('/supplier/create', 'SupplierController@create');
+Route::post('/supplier', 'SupplierController@store');
+Route::get('/supplier/{id}/edit', 'SupplierController@edit');
+Route::put('/supplier/{id}/', 'SupplierController@update');
+Route::get('/supplier/{id}/delete', 'SupplierController@delete');
 
 Route::get('/product', 'ProductController@view');
 Route::get('/product/create', 'ProductController@create');
@@ -26,6 +32,37 @@ Route::put('/product/{id}/', 'ProductController@update');
 Route::get('/product/{id}/delete', 'ProductController@delete');
 
 
-Route::get('/supplier', 'HomeController@index');
-Route::get('/costumer', 'HomeController@index');
-Route::get('/category', 'HomeController@index');
+Route::get('/customer', 'CustomerController@view');
+Route::get('/customer/create', 'CustomerController@create');
+Route::post('/customer', 'CustomerController@store');
+Route::get('/customer/{id}/edit', 'CustomerController@edit');
+Route::put('/customer/{id}/', 'CustomerController@update');
+Route::get('/customer/{id}/delete', 'CustomerController@delete');
+
+
+Route::get('/category', 'CategoryController@view');
+Route::get('/category/create', 'CategoryController@create');
+Route::post('/category', 'CategoryController@store');
+Route::get('/category/{id}/edit', 'CategoryController@edit');
+Route::put('/category/{id}/', 'CategoryController@update');
+Route::get('/category/{id}/delete', 'CategoryController@delete');
+
+
+Route::get('/purchase', 'PurchaseController@view');
+Route::get('/purchase/create', 'PurchaseController@create');
+Route::post('/purchase', 'PurchaseController@store');
+Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
+Route::put('/purchase/{id}/', 'PurchaseController@update');
+Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
+
+
+
+
+
+
+
+
+
+
+
+

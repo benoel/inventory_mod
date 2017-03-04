@@ -36,16 +36,16 @@
 	<ul class="sidenav">
 		<li>Transaksi
 			<ul>
-				<li><a href="{{ url('pembelian') }}">Pembelian</a></li>
-				<li><a href="{{ url('penjualan') }}">Penjualan</a></li>
+				<li><a href="{{ url('purchase') }}">Pembelian</a></li>
+				<li><a href="{{ url('sale') }}">Penjualan</a></li>
 			</ul>
 		</li>
 		<li>Master
 			<ul>
 				<li><a href="{{ url('product') }}">Barang</a></li>
 				<li><a href="{{ url('supplier') }}">Supplier</a></li>
-				<li><a href="{{ url('costumer') }}">Customer</a></li>
-				<li><a href="{{ url('category') }}">Category</a></li>
+				<li><a href="{{ url('customer') }}">Customer</a></li>
+				<li><a href="{{ url('category') }}">Kategori</a></li>
 			</ul>
 		</li>
 	</ul>

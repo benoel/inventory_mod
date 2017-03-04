@@ -15,11 +15,12 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('supplier_id');
-            $table->integer('total_price');
-            $table->string('type');
+            $table->integer('supplier_id')->unsigned();
+            $table->integer('total_price')->unsigned();
+            $table->string('type')->nullable();
             $table->text('note')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

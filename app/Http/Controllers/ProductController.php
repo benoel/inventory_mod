@@ -23,6 +23,7 @@ class ProductController extends Controller
 	function store(Request $request){
 		Product::create([
 			'name' => $request->name,
+			'barcode' => $request->barcode,
 			'unit' => $request->unit,
 			'stock' => $request->stock,
 			'price_sale' => $request->price_sale,
@@ -43,6 +44,7 @@ class ProductController extends Controller
 	function update(Request $request, $id){
 		Product::find($id)->update([
 			'name' => $request->name,
+			'barcode' => $request->barcode,
 			'unit' => $request->unit,
 			'stock' => $request->stock,
 			'price_sale' => $request->price_sale,

@@ -7,6 +7,7 @@
 	<thead>
 		<tr>
 			{{-- <th>Barcode</th> --}}
+			<th>Barcode</th>
 			<th>Nama Barang</th>
 			<th>Unit</th>
 			<th>Stock</th>
@@ -19,12 +20,13 @@
 	<tbody>
 		@foreach ($dataproduct as $data)
 		<tr>
+			<td>{{ $data->barcode }}</td>
 			<td>{{ $data->name }}</td>
 			<td>{{ $data->unit }}</td>
 			<td>{{ $data->stock }}</td>
 			<td>{{ $data->category->name }}</td>
-			<td>{{ $data->price_buy }}</td>
 			<td>{{ $data->price_sale }}</td>
+			<td>{{ $data->price_buy }}</td>
 			<td><a href="{{ url('product/'. $data->id .'/edit') }}">Edit</a> || <a href="{{ url('product/'. $data->id .'/delete') }}">Delete</a> </td>
 		</tr>
 		@endforeach

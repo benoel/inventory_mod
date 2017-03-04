@@ -6,7 +6,10 @@
 		<form action="{{ url('product/'. $data->id .'') }}" method="POST">
 			{{ csrf_field() }}
 			<input type="hidden" name="_method" value="PUT">
-
+			<div class="form-group">
+				<label for="1">Barcode Barang</label>
+				<input name="barcode" type="text" class="form-control" id="1" placeholder="Barcode Barang" value="{{ $data->barcode }}">
+			</div>
 			<div class="form-group">
 				<label for="1">Nama Barang</label>
 				<input name="name" type="text" class="form-control" id="1" placeholder="Nama Barang" value="{{ $data->name }}">

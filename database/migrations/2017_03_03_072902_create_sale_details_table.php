@@ -15,12 +15,13 @@ class CreateSaleDetailsTable extends Migration
     {
         Schema::create('sale_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sale_id');
-            $table->integer('product_id');
-            $table->integer('quantity');
-            $table->integer('price');
-            $table->integer('total');
-            $table->timestamps();
+            $table->integer('sale_id')->unsigned();
+            $table->integer('product_id')->unsigned();
+            $table->smallInteger('quantity')->unsigned()->default(1);
+            $table->mediumInteger('price')->unsigned()->nullable();
+            $table->integer('total')->unsigned();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 
