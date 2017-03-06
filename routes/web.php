@@ -55,6 +55,10 @@ Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
 Route::put('/purchase/{id}/', 'PurchaseController@update');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
 
+Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
+Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');
+
+
 
 
 

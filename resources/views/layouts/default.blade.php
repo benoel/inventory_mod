@@ -6,7 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Inventory_mod</title>
+	<link rel="stylesheet" href="{{ url('css/select2.min.css') }}">
 	<script src="{{ url('js/jquery-3.1.1.min.js') }}"></script>
+	<script src="{{ url('js/select2.min.js') }}"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -25,7 +27,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script> --}}
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -59,25 +61,37 @@
 			margin-left: 270px;
 			margin-top: 20px;
 			padding-right: 30px;
+			margin-top: 50px;
+			padding-top: 30px;
 		}
 
+		nav.navbar.navbar-inverse,
 		nav.navbar.navbar-default{
 			margin-bottom: 0;
+			border: none;
+			border-radius: 0;
 		}
 		.sidenav{
+			padding-top: 20px;
+			background-color: #333333;
 			position: fixed;
 			border-right: 1px solid #E9EBEE;
 			width: 250px;
 			height: 100%;
 			padding-left: 20px;
+			color: #fafafa;
 		}
 		.sidenav li{
 			list-style: none;
 			padding: 5px;
 		}
 
-		.sidenav li ul{
-			/*display: none;*/
+		.sidenav li ul li a{
+			color: #fafafa;
+		}
+		
+		select, .select2{
+			margin-bottom: 20px;
 		}
 
 	</style>

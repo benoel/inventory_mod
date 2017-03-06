@@ -21,4 +21,20 @@ class Product extends Model
 	{
 		return $this->hasMany('App\SaleDetail');
 	}
+
+	public function purchasedetailproduct()
+	{
+		return $this->hasMany('App\PurchaseDetailProduct');
+	}
+
+	public function saledetailproduct()
+	{
+		return $this->hasMany('App\SaleDetailProduct');
+	}
+
+	public function suppliers()
+	{
+		return $this->belongsToMany('App\Supplier', 'product_suppliers');
+	}
+
 }
