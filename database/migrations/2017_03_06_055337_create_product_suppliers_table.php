@@ -4,22 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesTable extends Migration
+class CreateProductSuppliersTable extends Migration
 {
     /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    * Run the migrations.
+    *
+    * @return void
+    */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('sale_number', 30)->unique();
-            $table->integer('customer_id')->unsigned();
-            $table->integer('total_price')->unsigned();
+        Schema::create('product_suppliers', function (Blueprint $table) {
+            $table->integer('product_id')->unsigned();
+            $table->integer('supplier_id')->unsigned();
             $table->string('type')->nullable();
-            $table->text('note')->nullable();
+            $table->integer('price')->unsigned()->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -32,6 +30,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('product_suppliers');
     }
 }
