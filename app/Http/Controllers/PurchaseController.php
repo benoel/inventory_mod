@@ -112,14 +112,9 @@ class PurchaseController extends Controller
 		return redirect('purchase');
 	}
 
-	function databarang($idbarang, $idsupplier, $tipebeli){
-		$databarang = ProductSupplier::where([
-			['product_id', $idbarang],
-			['Supplier_id', $idsupplier],
-			['type', $tipebeli]
-			]);
+	function databarang($idsupplier, $idsupplier, $tipebeli){
 		
-		return $databarang;
+
 	}
 
 	function tambahdetail(){

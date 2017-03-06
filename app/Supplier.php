@@ -12,8 +12,15 @@ class Supplier extends Model
 		return $this->hasMany('App\Purchase');
 	}
 
-	public function products()
+	public function product_suppliers()
 	{
-		return $this->belongsToMany('App\Product');
+		return $this->hasMany('App\ProductSupplier');
 	}
+
+	// public function products()
+	// {
+	// 	return $this->belongsToMany('App\Product');
+	// }
+
+
 }
