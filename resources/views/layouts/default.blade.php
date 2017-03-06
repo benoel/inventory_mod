@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script> --}}
+	<script src="{{ url('js/jquery.scannerdetection.js') }}"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -54,6 +55,8 @@
 		@yield('content')
 	</div>
 
+	<script src="{{ url('js/transaction.js') }}"></script>
+	
 	<style>
 		.main-content{
 			margin-left: 270px;

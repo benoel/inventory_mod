@@ -55,14 +55,5 @@ Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
 Route::put('/purchase/{id}/', 'PurchaseController@update');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
 
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/test/{type?}', 'HomeController@transaction');
+Route::get('/barang/{barcode}', 'HomeController@additem');

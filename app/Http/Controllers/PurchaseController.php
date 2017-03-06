@@ -9,7 +9,7 @@ class PurchaseController extends Controller
 {
 	function view(){
 		$datapurchase = Purchase::all();
-		return view('purchase/view', compact('datapurchase'));
+		return view('purchase.view', compact('datapurchase'));
 	}
 
 	function create(){
