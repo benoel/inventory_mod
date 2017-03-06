@@ -55,23 +55,8 @@ Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
 Route::put('/purchase/{id}/', 'PurchaseController@update');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
 
-<<<<<<< HEAD
-Route::get('/test/{type?}', 'HomeController@transaction');
-Route::get('/barang/{barcode}', 'HomeController@additem');
-=======
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');
 
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> bc73affd66f1ed28b391785f0afabc0c99801b01
+Route::get('/test/{type?}', 'HomeController@transaction');
+Route::get('/barang/{barcode}', 'HomeController@additem');

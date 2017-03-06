@@ -7,10 +7,9 @@
       <p>Tanggal: {{ date("d-M-Y") }}</p>
       {{-- {{json_encode($products)}} --}}
       <select name="productName">
-          <option value=""></option>
-        @foreach($products as $item)
+        {{-- @foreach($products as $item)
           <option value="{{$item->id}}">{{$item->name}}</option>
-        @endforeach
+        @endforeach --}}
       </select>
       <ul id="product-list"></ul>
     </div>
