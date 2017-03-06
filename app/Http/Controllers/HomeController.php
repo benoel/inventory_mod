@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Supplier;
 
 class HomeController extends Controller
 {
@@ -30,5 +31,15 @@ class HomeController extends Controller
       ->get();
 
     return response($product);
+  }
+
+  function testbarang($supplier,$barcode,$type){
+    $supplier = Supplier::find($supplier)
+      ->products()
+      ->where('barcode',$barcode)
+      ->wherePivot('type',$type)
+      ->get();
+      
+    return response(compact('supplier'));
   }
 }
