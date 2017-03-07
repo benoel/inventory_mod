@@ -29,10 +29,34 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{{ url('/') }}">Inventory MOD</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+	        <li>
+	        	<a href="{{url('purchase')}}">
+	        		<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Pembelian
+	        	</a>
+	        </li>
+	        <li>
+	        	<a href="{{url('sale')}}">
+	        		<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Penjualan
+	        	</a>
+	        </li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Barang</a></li>
+	            <li><a href="#">Kategori</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href="#">Supplier</a></li>
+	            <li><a href="#">Customer</a></li>
+	          </ul>
+	        </li>
+	      </ul>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
