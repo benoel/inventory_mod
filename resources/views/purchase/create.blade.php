@@ -221,7 +221,7 @@
 				url: '{{ url('purchase') }}',
 				type: 'POST',
 				success: function(data){
-					data;
+					window.location.href = '{{ url('purchase') }}';
 				}
 			})
 		});
