@@ -94,17 +94,29 @@ class PurchaseController extends Controller
 			// $aa = Purchase::where('purchase_number', $request->purchase_number)->first();
 			$pdp = PurchaseDetailProduct::all();
 			foreach ($pdp as $value) {
-				DB::table('purchase_details')->insert([
-					'purchase_number' => $request->$purchase_number,
+				$savepurchasedetail = DB::table('purchase_details')->insert([
+					'purchase_number' => $request->purchase_number,
 					'product_id' => $value->product_id,
 					'quantity' => $value->quantity,
 					'price' => $value->price,
 					'total' => $value->total,
 					]);
 			}
+			if ($savepurchasedetail) {
+				$dtproduct = PurchaseDetailProduct::all();
+				foreach ($dtproduct as $a) {
+					$dtproduct_stock = $a->product->stock;
+					$updateproduct = Product::find($a->product_id)->update([
+						'stock' => $dtproduct_stock - $a->quantity
+						]);
+				}
+				if ($updateproduct) {
+					$deletepurchasedetailproduct = PurchaseDetailProduct::truncate();
+				}
+			}	
 		}
 
-		return redirect('purchase');
+		// return redirect('purchase');
 	}
 
 	function edit($id){

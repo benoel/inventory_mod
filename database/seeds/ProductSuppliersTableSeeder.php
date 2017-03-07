@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProductSupplierTableSeeder extends Seeder
+class ProductSuppliersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +12,11 @@ class ProductSupplierTableSeeder extends Seeder
     public function run()
     {
     	$faker = Faker\Factory::create();
-    	DB::table('product_supplier')->truncate();
+    	DB::table('product_suppliers')->truncate();
     	foreach ((range(1, 15)) as $index) {
     		$price = $faker->numberBetween($min = 10000, $max = 450000);
 
-    		DB::table('product_supplier')->insert([
+    		DB::table('product_suppliers')->insert([
     			'product_id'    => rand(1,150),
     			'supplier_id' => rand(1,15),
     			'type' => $faker->randomElement($array = array ('pickup','deliver')),

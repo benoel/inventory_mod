@@ -22,7 +22,7 @@ class SalesTableSeeder extends Seeder
           'customer_id' => $index,
           'total_price' => $faker->numberBetween($min = 1000000, $max = 45000000),
           'type'        => $faker->randomElement($array = array ('pickup','deliver'))
-        ]);
+          ]);
       }
 
       foreach ((range(1, 15)) as $index) {
@@ -30,13 +30,13 @@ class SalesTableSeeder extends Seeder
           $price = $faker->numberBetween($min = 10000, $max = 450000);
           $quantity = rand(1, 5);
           DB::table('sale_details')->insert([
-            'sale_id' => $index,
+            'sale_number' => $index,
             'product_id'  => rand(1,150),
             'quantity'    => $quantity,
             'price'       => $price,
             'total'       => $price * $quantity
-          ]);
+            ]);
         }
       }
     }
-}
+  }
