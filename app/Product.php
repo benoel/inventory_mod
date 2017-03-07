@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 	protected $guarded = [];
+
 	public function category()
 	{
 		return $this->belongsTo('App\Category');
@@ -34,12 +35,12 @@ class Product extends Model
 
 	public function productsupplier()
 	{
-		return $this->hasMany('App\ProductSupplier');
+		return $this->belongsToMany('App\Supplier', 'product_suppliers')->withPivot('type','price');
 	}
 
-	// public function suppliers()
-	// {
-	// 	return $this->belongsToMany('App\Supplier');
-	// }
+	public function suppliers()
+	{
+		return $this->belongsToMany('App\Supplier');
+	}
 
 }

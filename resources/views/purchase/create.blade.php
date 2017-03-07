@@ -4,25 +4,27 @@
 <h2 class="right">No : {{ $purchasenumber }}</h2>
 <div class="row">
 	<div class="col-md-6">
-		{{-- <div class="form-inline"> --}}
-		<label for="1">Nama Supplier</label>
-		<select class="form-control select2" id="supplierId" name="supplier_id">
-			<option disabled selected>Pilih</option>
-			@foreach ($datasupplier as $element)
-			<option value="{{ $element->id }}">{{ $element->name }}</option>
-			@endforeach
-		</select>
-		<label for="1">Pilih Type Pembelian</label>
-		<select class="form-control" id="tipepembelian" name="">
-			<option disabled selected>Pilih</option>
-			<option value="pickup">Pickup</option>
-			<option value="deliver">Deliver</option>
-		</select>
-		<div class="form-group">
-			<label for="2">Note</label>
-			<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
-		</div>
-		{{-- </div> --}}
+		<form id="simpanPembelianForm" action="POST">
+			{{ csrf_field() }}
+			<input type="hidden" value="{{ $purchasenumber }}" name="purchase_number">
+			<label for="1">Nama Supplier</label>
+			<select class="form-control select2" id="supplierId" name="supplier_id">
+				<option disabled selected>Pilih</option>
+				@foreach ($datasupplier as $element)
+				<option value="{{ $element->id }}">{{ $element->name }}</option>
+				@endforeach
+			</select>
+			<label for="1">Pilih Type Pembelian</label>
+			<select class="form-control" id="tipepembelian" name="type">
+				<option disabled selected>Pilih</option>
+				<option value="pickup">Pickup</option>
+				<option value="deliver">Deliver</option>
+			</select>
+			<div class="form-group">
+				<label for="2">Note</label>
+				<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
+			</div>
+		</form>
 	</div>
 </div>
 <div class="divider"></div>
@@ -48,17 +50,26 @@
 							</div>
 							<div class="form-group harga">
 								<label for="hargaBeli">Harga Beli</label>
-								<input name="price" id="hargaBeli" type="text" class="form-control" id="hargaBeli" placeholder="Harga Beli">
+								<input disabled id="hargaBeli" type="text" class="form-control hargaBeli" id="hargaBeli" placeholder="Harga Beli">
+								<input type="hidden" name="price" class="hargaBeli">
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group">
+							{{-- <div class="form-group">
 								<label for="productName">Nama Barang</label>
 								<input disabled type="text" class="form-control" id="productName" placeholder="Nama Barang">
-							</div>
+							</div> --}}
+							<label for="">Nama Barang</label>
+							<select class="form-control select2" id="namabarang" name="name">
+								<option disabled selected>Pilih</option>
+								@foreach ($dataproduct as $element)
+								<option value="{{ $element->id }}">{{ $element->name }}</option>
+								@endforeach
+							</select>
 							<div class="form-group qty">
 								<label for="totalHarga">Total Harga</label>
-								<input name="total" disabled type="text" class="form-control" id="totalHarga" placeholder="Total Harga">
+								<input disabled type="text" class="form-control totalHarga" id="totalHarga" placeholder="Total Harga">
+								<input type="hidden" name="total" class="totalHarga">
 							</div>
 							<div class="form-group harga">
 								<label for="productUnit">Unit</label>
@@ -75,32 +86,12 @@
 	</div>
 </div>
 
-<table class="table">
-	<thead>
-		<tr>
-			<th>No.</th>
-			<th>Nama Barang</th>
-			<th>Qty</th>
-			<th>Harga Beli</th>
-			<th>Sub Total</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>1</td>
-			<td>Beras</td>
-			<td>6</td>
-			<td>5000</td>
-			<td>30000</td>
-		</tr>
-		<tr>
-			<td colspan="4"><b>Total</b></td>
-			<td>30000</td>
-		</tr>
-	</tbody>
-</table>
+<div id="table">
+
+</div>
+
 <div class="center">
-	<button class="btn btn-default">SIMPAN PEMBELIAN</button>
+	<button id="simpanPembelian" class="btn btn-default">SIMPAN PEMBELIAN</button>
 </div>
 
 <div class="well" style="margin-top: 20px;">
@@ -132,9 +123,14 @@
 	.center{
 		text-align: center;
 	}
+
+	#totalHarga{
+		cursor: not-allowed;
+	}
 </style>
 
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$(".select2").select2();
 
@@ -143,30 +139,45 @@
 			var idsupplier = $("#supplierId").val();
 			var tipebeli = $('#tipepembelian').val();
 			$.ajax({
-				url: '{{ url("databarang") }}' + '/' + idproduct + '/' + idsupplier + '/' + tipebeli,
+				url: '{{ url("databarang") }}' + '/' + idsupplier + '/' + idproduct + '/' + tipebeli,
 				type: 'GET',
+				dataType: 'JSON',
 				success: function(data){
-					// $('#hargaBeli').val(data.price);
-					// $('#productName').val(data.name);
-					// $('#productUnit').val(data.unit);
 					console.log(data);
+					for(var i in data){
+						// $('.hargaBeli').val(data[i].price);
+						$('#namabarang').val(idproduct).change();
+						$('#productUnit').val(data[i].unit);
+						var pivot = data[i].pivot;
+						$('.hargaBeli').val(pivot.price)
+
+					}
 				}
 			})
 		});
 
+		setInterval(function(){
+			$.ajax({
+				url: '{{ url('tabledetailpembelian') }}',
+				success: function(data){
+					$('#table').html(data);
+				}
+			})
+		}, 1000);
+
 		$('#qty').keyup(function() {
 			var jm = total();
-			$('#totalHarga').val(jm);
+			$('.totalHarga').val(jm);
 		});
 
 		$('#hargaBeli').keyup(function() {
 			var jm = total();
-			$('#totalHarga').val(jm);
+			$('.totalHarga').val(jm);
 		});
 
 		$('#totalHarga').keyup(function() {
 			var jm = total();
-			$('#totalHarga').val(jm);
+			$('.totalHarga').val(jm);
 		});
 
 		function total(){
@@ -186,6 +197,31 @@
 				type: 'POST',
 				success: function(data){
 					console.log(data);
+				}
+			})
+		});
+
+		$('#btnTambah').click(function(event) {
+			event.preventDefault();
+			var dt = $('#formTambahBarang').serialize();
+			$.ajax({
+				data: dt,
+				url: '{{ url('tambahdetailpembelian') }}',
+				type: 'POST',
+				success: function(data){
+					data;
+				}
+			})
+		});
+		$('#simpanPembelian').click(function(event) {
+			event.preventDefault();
+			var bc = $('#simpanPembelianForm').serialize();
+			$.ajax({
+				data: bc,
+				url: '{{ url('purchase') }}',
+				type: 'POST',
+				success: function(data){
+					data;
 				}
 			})
 		});

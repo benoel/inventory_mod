@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Purchase extends Model
 {
 	protected $guarded = [];
-	public function suplier()
+	public function supplier()
 	{
-		return $this->belongsTo('App\Suplier');
+		return $this->belongsTo('App\Supplier');
 	}
 
 	public function purchasedetails()

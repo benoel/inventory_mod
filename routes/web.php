@@ -57,6 +57,16 @@ Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
 
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');
+Route::get('/tabledetailpembelian', 'PurchaseController@table');
+
+
+// UNTUK COBA DICOBA COBA BA BA BA BA BA
+Route::get('/test/{type?}', 'HomeController@transaction');
+Route::get('/barang/{barcode}', 'HomeController@additem');
+Route::get('/testbarang/{supplier}/{barcode}/{type}', 'HomeController@testbarang');
+
+
+
 
 
 
