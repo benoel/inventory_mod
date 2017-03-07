@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use App\Purchase;
 use App\Supplier;
 use App\Product;
 use App\PurchaseDetailProduct;
-use App\ProductSupplier;
+
 
 class PurchaseController extends Controller
 {
@@ -77,16 +78,31 @@ class PurchaseController extends Controller
 		$datasupplier = Supplier::all();
 		$dataproduct = Product::all();
 		// dd($purchasenumber->count());
+
 		return view('purchase.create', compact('purchasenumber', 'datasupplier', 'dataproduct'));
 	}
 
 	function store(Request $request){
-		Purchase::create([
-			'name' => $request->name,
-			'address' => $request->address,
-			'phone' => $request->phone,
-			'detail' => $request->detail,
+		$abc = PurchaseDetailProduct::all();
+		$savepembelian = Purchase::create([
+			'supplier_id' => $request->supplier_id,
+			'purchase_number' => $request->purchase_number,
+			'type' => $request->type,
+			'total_price' => $abc->sum('total'),
 			]);
+		if ($savepembelian) {
+			// $aa = Purchase::where('purchase_number', $request->purchase_number)->first();
+			$pdp = PurchaseDetailProduct::all();
+			foreach ($pdp as $value) {
+				DB::table('purchase_details')->insert([
+					'purchase_number' => $request->$purchase_number,
+					'product_id' => $value->product_id,
+					'quantity' => $value->quantity,
+					'price' => $value->price,
+					'total' => $value->total,
+					]);
+			}
+		}
 
 		return redirect('purchase');
 	}
@@ -112,24 +128,30 @@ class PurchaseController extends Controller
 		return redirect('purchase');
 	}
 
-	function databarang($idbarang, $idsupplier, $tipebeli){
-		$databarang = ProductSupplier::where([
-			['product_id', $idbarang],
-			['Supplier_id', $idsupplier],
-			['type', $tipebeli]
-			]);
-		
-		return $databarang;
+	function databarang($idsupplier, $idbarang, $tipebeli){
+
+		$supplier = Supplier::find($idsupplier)
+		->products()
+		->where('id',$idbarang)
+		->wherePivot('type',$tipebeli)
+		->get();
+
+		return $supplier;
 	}
 
-	function tambahdetail(){
+	function tambahdetail(Request $request){
 		PurchaseDetailProduct::create([
 			'product_id' => $request->product_id,
 			'quantity' => $request->quantity,
 			'price' => $request->price,
 			'total' => $request->total,
 			]);
-		return "oke COK!!";
+		return 'oke COEG!!';
+	}
+
+	function table(){
+		$dttable = PurchaseDetailProduct::all();
+		return view('purchase.table', compact('dttable'));
 	}
 
 }

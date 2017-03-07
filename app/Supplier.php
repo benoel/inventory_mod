@@ -16,4 +16,7 @@ class Supplier extends Model
 	{
 		return $this->belongsToMany('App\Product','product_suppliers')->withPivot('type','price');
 	}
+
+
+
 }
