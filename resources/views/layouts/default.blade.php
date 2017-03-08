@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Inventory_mod</title>
 	<link rel="stylesheet" href="{{ url('css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ url('css/style.css') }}">
 	<script src="{{ url('js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ url('js/select2.min.js') }}"></script>
 
@@ -29,74 +30,93 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="{{ url('/') }}">Inventory MOD</a>
 			</div>
-		</div><!-- /.container-fluid -->
-	</nav>
-	<ul class="sidenav">
-		<li>Transaksi
-			<ul>
-				<li><a href="{{ url('purchase') }}">Pembelian</a></li>
-				<li><a href="{{ url('sale') }}">Penjualan</a></li>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="{{url('purchase')}}">
+							<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Pembelian
+						</a>
+					</li>
+					<li>
+						<a href="{{url('sale')}}">
+							<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Penjualan
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" 
+						class="dropdown-toggle" 
+						data-toggle="dropdown" 
+						role="button" 
+						aria-haspopup="true" 
+						aria-expanded="false"
+						><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Master <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{{url('product')}}">Barang</a></li>
+						<li><a href="{{url('category')}}">Kategori</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="{{url('supplier')}}">Supplier</a></li>
+						<li><a href="{{url('costumer')}}">Customer</a></li>
+					</ul>
+				</li>
 			</ul>
-		</li>
-		<li>Master
-			<ul>
-				<li><a href="{{ url('product') }}">Barang</a></li>
-				<li><a href="{{ url('supplier') }}">Supplier</a></li>
-				<li><a href="{{ url('customer') }}">Customer</a></li>
-				<li><a href="{{ url('category') }}">Kategori</a></li>
-			</ul>
-		</li>
-	</ul>
+		</div>
+	</div><!-- /.container-fluid -->
+</nav>
+{{-- <ul class="sidenav">
+	<li>Transaksi
+		<ul>
+			<li><a href="{{ url('purchase') }}">Pembelian</a></li>
+			<li><a href="{{ url('sale') }}">Penjualan</a></li>
+		</ul>
+	</li>
+	<li>Master
+		<ul>
+			<li><a href="{{ url('product') }}">Barang</a></li>
+			<li><a href="{{ url('supplier') }}">Supplier</a></li>
+			<li><a href="{{ url('customer') }}">Customer</a></li>
+			<li><a href="{{ url('category') }}">Kategori</a></li>
+		</ul>
+	</li>
+</ul> --}}
 
-	<div class="main-content">
-		@yield('content')
-	</div>
+<div class="main-content container-fluid">
+	@yield('content')
+</div>
 
-	<script src="{{ url('js/transaction.js') }}"></script>
-	
-	<style>
-		.main-content{
-			margin-left: 270px;
-			margin-top: 20px;
-			padding-right: 30px;
-			margin-top: 50px;
-			padding-top: 30px;
-		}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-		nav.navbar.navbar-inverse,
-		nav.navbar.navbar-default{
-			margin-bottom: 0;
-			border: none;
-			border-radius: 0;
-		}
-		.sidenav{
-			padding-top: 20px;
-			background-color: #333333;
-			position: fixed;
-			border-right: 1px solid #E9EBEE;
-			width: 250px;
-			height: 100%;
-			padding-left: 20px;
-			color: #fafafa;
-		}
-		.sidenav li{
-			list-style: none;
-			padding: 5px;
-		}
+<script src="{{ url('js/typeahead.bundle.js') }}"></script>
+<script src="{{ url('js/transaction.js') }}"></script>
 
-		.sidenav li ul li a{
-			color: #fafafa;
-		}
-		
-		select, .select2{
-			margin-bottom: 20px;
-		}
-
-	</style>
 </body>
 </html>

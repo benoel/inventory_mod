@@ -37,8 +37,8 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6">
-							<label for="">Barcode</label>
-							<select class="form-control select2" id="barcode" name="product_id">
+							<label for="purchaseBarcode">Barcode</label>
+							<select class="form-control select2" id="purchaseBarcode" name="product_id">
 								<option disabled selected>Pilih</option>
 								@foreach ($dataproduct as $element)
 								<option value="{{ $element->id }}">{{ $element->barcode }}</option>
@@ -134,23 +134,26 @@
 	$(document).ready(function() {
 		$(".select2").select2();
 
-		$('#barcode').change(function(){
+		$('#namabarang').change(function(){
 			var idproduct = $(this).val();
-			var idsupplier = $("#supplierId").val();
+			var idsupplier = $("#supplierId option:selected").val();
 			var tipebeli = $('#tipepembelian').val();
+
 			$.ajax({
 				url: '{{ url("databarang") }}' + '/' + idsupplier + '/' + idproduct + '/' + tipebeli,
 				type: 'GET',
 				dataType: 'JSON',
 				success: function(data){
-					console.log(data);
 					for(var i in data){
 						// $('.hargaBeli').val(data[i].price);
-						$('#namabarang').val(idproduct).change();
-						$('#productUnit').val(data[i].unit);
+						// $('#namabarang').val(idproduct).change();
+						// $('#productUnit').val(data[i].unit);
 						var pivot = data[i].pivot;
-						$('.hargaBeli').val(pivot.price)
-
+					}
+					if(data.length === 0){
+						$('#myModal').modal('show')
+					}else{
+						$('.hargaBeli').val(pivot.price);
 					}
 				}
 			})

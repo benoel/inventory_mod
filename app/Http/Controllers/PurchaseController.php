@@ -166,6 +166,14 @@ class PurchaseController extends Controller
 		return view('purchase.table', compact('dttable'));
 	}
 
+	function purchasedetail($purchase_number){
+		$datadetail = Purchase::where('purchase_number', $purchase_number)->get();
+		$salenumber = $purchase_number;
+		$databarang = PurchaseDetail::where('purchase_number', $purchase_number)->get();
+
+		return view('purchase.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+	}
+
 }
 
 

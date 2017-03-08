@@ -54,6 +54,7 @@ Route::post('/purchase', 'PurchaseController@store');
 // Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
 // Route::put('/purchase/{id}/', 'PurchaseController@update');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
+Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
 
 Route::get('/sale', 'SaleController@view');
 Route::get('/sale/create', 'SaleController@create');
@@ -61,6 +62,7 @@ Route::post('/sale', 'SaleController@store');
 // Route::get('/sale/{id}/edit', 'SaleController@edit');
 // Route::put('/sale/{id}/', 'SaleController@update');
 Route::get('/sale/{id}/delete', 'SaleController@delete');
+Route::get('/sale/{id}/detail', 'SaleController@saledetail');
 
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');

@@ -19,7 +19,10 @@
 			<td>{{ $data->type }}</td>
 			<td>{{ $data->note }}</td>
 			<td>{{ $data->total_price }}</td>
-			<td><a href="{{ url('purchase/'. $data->purchase_number .'/edit') }}">View</a> || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a> </td>
+			<td>
+				<a href="{{ url('purchase/'. $data->purchase_number .'/detail') }}">View</a> 
+				{{-- || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a>  --}}
+			</td>
 		</tr>
 		@endforeach
 	</tbody>

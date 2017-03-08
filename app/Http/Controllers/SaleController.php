@@ -9,6 +9,7 @@ use App\Sale;
 use App\Customer;
 use App\Product;
 use App\SaleDetailProduct;
+use App\SaleDetail;
 
 class SaleController extends Controller
 {
@@ -159,4 +160,13 @@ class SaleController extends Controller
 		$dttable = SaleDetailProduct::all();
 		return view('sale.table', compact('dttable'));
 	}
+
+	function saledetail($sale_number){
+		$datadetail = Sale::where('sale_number', $sale_number)->get();
+		$salenumber = $sale_number;
+		$databarang = SaleDetail::where('sale_number', $sale_number)->get();
+
+		return view('sale.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+	}
+
 }

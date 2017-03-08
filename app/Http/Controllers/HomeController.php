@@ -40,6 +40,6 @@ class HomeController extends Controller
       ->wherePivot('type',$type)
       ->get();
       
-    return response(compact('supplier'));
+    return response()->json($supplier);
   }
 }
