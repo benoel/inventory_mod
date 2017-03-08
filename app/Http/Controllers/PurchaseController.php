@@ -107,7 +107,7 @@ class PurchaseController extends Controller
 				foreach ($dtproduct as $a) {
 					$dtproduct_stock = $a->product->stock;
 					$updateproduct = Product::find($a->product_id)->update([
-						'stock' => $dtproduct_stock - $a->quantity
+						'stock' => $dtproduct_stock + $a->quantity
 						]);
 				}
 				if ($updateproduct) {

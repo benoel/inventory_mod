@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-<a href="{{ url('purchase/create') }}" class="btn btn-default">Input Pembelian</a>
+<a href="{{ url('sale/create') }}" class="btn btn-default">Input Penjualan</a>
 
 <table id="inventoryTable" class="display">
 	<thead>
@@ -13,13 +13,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach ($datapurchase as $data)
+		@foreach ($datasale as $data)
 		<tr>
-			<td>{{ $data->supplier->name }}</td>
+			<td>{{ $data->customer->name }}</td>
 			<td>{{ $data->type }}</td>
 			<td>{{ $data->note }}</td>
 			<td>{{ $data->total_price }}</td>
-			<td><a href="{{ url('purchase/'. $data->purchase_number .'/edit') }}">View</a> || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a> </td>
+			<td><a href="{{ url('purchase/'. $data->sale_number .'/edit') }}">View</a> || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a> </td>
 		</tr>
 		@endforeach
 	</tbody>

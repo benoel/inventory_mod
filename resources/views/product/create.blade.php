@@ -7,7 +7,7 @@
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="1">Barcode</label>
-				<input name="barcode" type="text" class="form-control" id="1" placeholder="Barcode Barang">
+				<input name="barcode" type="text" class="form-control" id="inputBarcode" placeholder="Barcode Barang">
 			</div>
 			<div class="form-group">
 				<label for="1">Nama Barang</label>
