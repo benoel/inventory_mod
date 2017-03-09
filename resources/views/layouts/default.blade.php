@@ -44,7 +44,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="{{url('purchase')}}">
+						<a href="{{url('purchase/create')}}">
 							<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Pembelian
 						</a>
 					</li>
@@ -63,6 +63,9 @@
 						><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Master <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li><a href="{{url('purchase')}}">List Penjualan</a></li>
+						<li><a href="{{url('sale')}}">List Pembelian</a></li>
+						<li role="separator" class="divider"></li>
 						<li><a href="{{url('product')}}">Barang</a></li>
 						<li><a href="{{url('category')}}">Kategori</a></li>
 						<li role="separator" class="divider"></li>

@@ -1,111 +1,133 @@
 @extends('layouts.default')
 @section('content')
-<h1>Input Detail Pembelian</h1>
-<h2 class="right">No : {{ $purchasenumber }}</h2>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-8">
+		<div>
+			<h2 class="">No : {{ $purchasenumber }}</h2>
+		</div>
+		<div class="divider"></div>
+		<div id="table"></div>
+	</div>
+
+	<div class="col-md-4">
 		<form id="simpanPembelianForm" action="POST">
 			{{ csrf_field() }}
-			<input type="hidden" value="{{ $purchasenumber }}" name="purchase_number">
-			<label for="1">Nama Supplier</label>
-			<select class="form-control select2" id="supplierId" name="supplier_id">
-				<option disabled selected>Pilih</option>
-				@foreach ($datasupplier as $element)
-				<option value="{{ $element->id }}">{{ $element->name }}</option>
-				@endforeach
-			</select>
-			<label for="1">Pilih Type Pembelian</label>
-			<select class="form-control" id="tipepembelian" name="type">
-				<option disabled selected>Pilih</option>
-				<option value="pickup">Pickup</option>
-				<option value="deliver">Deliver</option>
-			</select>
-			<div class="form-group">
+			<div class="row">
+				<div class="col-md-12">
+					<input type="hidden" value="{{ $purchasenumber }}" name="purchase_number">
+					<label for="1">Nama Supplier</label>
+					<select class="form-control select2" id="supplierId" name="supplier_id">
+						<option disabled selected>Pilih</option>
+						@foreach ($datasupplier as $element)
+						<option value="{{ $element->id }}">{{ $element->name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label for="1">Pilih Type Pembelian</label>
+					<select class="form-control" id="tipepembelian" name="type">
+						<option disabled selected>Pilih</option>
+						<option value="pickup">Pickup</option>
+						<option value="deliver">Deliver</option>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label for="1">Status Pembelian</label>
+					<select class="form-control" id="tipepembelian" name="type">
+						<option disabled selected>Progress</option>
+						<option value="pickup">Tunda</option>
+						<option value="deliver">COD</option>
+						<option value="deliver">Lunas</option>
+					</select>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
 				<label for="2">Note</label>
 				<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
 			</div>
+				</div>
+			</div>
 		</form>
-	</div>
-</div>
-<div class="divider"></div>
-<div class="row">
-	<div class="col-md-12">
+		<div class="divider"></div>
+
 		<form id="formTambahBarang" method="POST">
 			{{ csrf_field() }}
-			<div class="panel panel-default">
-				<div class="panel-heading">Barang</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-6">
-							<label for="purchaseBarcode">Barcode</label>
-							<select class="form-control select2" id="purchaseBarcode" name="product_id">
-								<option disabled selected>Pilih</option>
-								@foreach ($dataproduct as $element)
-								<option value="{{ $element->id }}">{{ $element->barcode }}</option>
-								@endforeach
-							</select>
-							<div class="form-group qty">
-								<label for="qty">Qty</label>
-								<input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity">
-							</div>
-							<div class="form-group harga">
-								<label for="hargaBeli">Harga Beli</label>
-								<input disabled id="hargaBeli" type="text" class="form-control hargaBeli" id="hargaBeli" placeholder="Harga Beli">
-								<input type="hidden" name="price" class="hargaBeli">
-							</div>
-						</div>
-						<div class="col-md-6">
-							{{-- <div class="form-group">
-								<label for="productName">Nama Barang</label>
-								<input disabled type="text" class="form-control" id="productName" placeholder="Nama Barang">
-							</div> --}}
-							<label for="">Nama Barang</label>
-							<select class="form-control select2" id="namabarang" name="name">
-								<option disabled selected>Pilih</option>
-								@foreach ($dataproduct as $element)
-								<option value="{{ $element->id }}">{{ $element->name }}</option>
-								@endforeach
-							</select>
-							<div class="form-group qty">
-								<label for="totalHarga">Total Harga</label>
-								<input disabled type="text" class="form-control totalHarga" id="totalHarga" placeholder="Total Harga">
-								<input type="hidden" name="total" class="totalHarga">
-							</div>
-							<div class="form-group harga">
-								<label for="productUnit">Unit</label>
-								<input disabled type="text" class="form-control" id="productUnit" placeholder="Unit">
-							</div>
-						</div>
-						<div class="center">
-							<button id="btnTambah" class="btn btn-default">Tambah</button>
-						</div>
+			<div class="row">
+				<div class="col-md-12">
+					<label for="purchaseBarcode">Barcode</label>
+					<select class="form-control select2" id="purchaseBarcode" name="product_id">
+						<option disabled selected>Pilih</option>
+						@foreach ($dataproduct as $element)
+						<option value="{{ $element->id }}">{{ $element->barcode }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-12">
+					<label for="">Nama Barang</label>
+					<select class="form-control select2" id="namabarang" name="name">
+						<option disabled selected>Pilih</option>
+						@foreach ($dataproduct as $element)
+						<option value="{{ $element->id }}">{{ $element->name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group qty">
+						<label for="qty">Qty</label>
+						<input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity">
 					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group harga">
+						<label for="hargaBeli">Harga Beli</label>
+						<input disabled id="hargaBeli" type="text" class="form-control hargaBeli" id="hargaBeli" placeholder="Harga Beli">
+						<input type="hidden" name="price" class="hargaBeli">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group harga">
+						<label for="productUnit">Unit</label>
+						<input disabled type="text" class="form-control" id="productUnit" placeholder="Unit">
+					</div>
+				</div>
+				<div class="col-md-6">
+					{{-- <div class="form-group">
+						<label for="productName">Nama Barang</label>
+						<input disabled type="text" class="form-control" id="productName" placeholder="Nama Barang">
+					</div> --}}
+					<div class="form-group qty">
+						<label for="totalHarga">Total Harga</label>
+						<input disabled type="text" class="form-control totalHarga" id="totalHarga" placeholder="Total Harga">
+						<input type="hidden" name="total" class="totalHarga">
+					</div>
+				</div>
+				<div class="center">
+					<button id="simpanPembelian" class="btn btn-default">SIMPAN PEMBELIAN</button>
+					<button id="btnTambah" class="btn btn-default">Tambah</button>
+				</div>
+				<div class="well" style="margin-top: 20px;">
+					* Kuantitas barang akan otomatis bertambah jika klik "simpan"
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
 
-<div id="table">
+{{-- <h1>Input Detail Pembelian</h1>
 
-</div>
 
 <div class="center">
-	<button id="simpanPembelian" class="btn btn-default">SIMPAN PEMBELIAN</button>
-</div>
-
-<div class="well" style="margin-top: 20px;">
-	* Kuantitas barang akan otomatis bertambah jika klik "simpan"
-</div>
+	
+</div> --}}
 
 <style>
 	.qty, .harga{
-		width: 48%;
+		/*width: 48%;*/
 		display: inline-block;
 	}
 
 	.qty{
-		margin-right: 2%;
+		/*margin-right: 2%;*/
 	}
 
 	.divider{
