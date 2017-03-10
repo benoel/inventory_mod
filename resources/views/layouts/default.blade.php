@@ -114,9 +114,9 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</div>
+	</div>
+</div>
 
 <script src="{{ url('js/typeahead.bundle.js') }}"></script>
 <script src="{{ url('js/transaction.js') }}"></script>
