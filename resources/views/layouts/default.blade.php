@@ -49,7 +49,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="{{url('sale')}}">
+						<a href="{{url('sale/create')}}">
 							<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Penjualan
 						</a>
 					</li>

@@ -78,7 +78,7 @@ class SaleController extends Controller
 		$dataproduct = Product::all();
 		// dd($purchasenumber->count());
 
-		return view('sale.create', compact('salenumber', 'datacustomer', 'dataproduct'));
+		return view('sale.create_v2', compact('salenumber', 'datacustomer', 'dataproduct'));
 	}
 
 	function store(Request $request){
