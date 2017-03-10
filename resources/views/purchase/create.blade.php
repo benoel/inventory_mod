@@ -16,7 +16,7 @@
 				<div class="col-md-12">
 					<input type="hidden" value="{{ $purchasenumber }}" name="purchase_number">
 					<label for="1">Nama Supplier</label>
-					<select class="form-control select2" id="supplierId" name="supplier_id">
+					<select class="form-control" id="supplierId" name="supplier_id">
 						<option disabled selected>Pilih</option>
 						@foreach ($datasupplier as $element)
 						<option value="{{ $element->id }}">{{ $element->name }}</option>
@@ -34,17 +34,17 @@
 				<div class="col-md-6">
 					<label for="1">Status Pembelian</label>
 					<select class="form-control" id="tipepembelian" name="type">
-						<option disabled selected>Progress</option>
-						<option value="pickup">Tunda</option>
-						<option value="deliver">COD</option>
-						<option value="deliver">Lunas</option>
+						<option value="open" selected>Progress</option>
+						<option value="hold">Tunda</option>
+						<option value="close">Lunas</option>
 					</select>
 				</div>
 				<div class="col-md-12">
-					<div class="form-group">
-				<label for="2">Note</label>
-				<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
-			</div>
+					<label for="2">Note</label>
+					<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
+				</div>
+				<div class="col-md-12" style="padding-top: 10px;">
+					<button id="buatPurchase" class="btn btn-default">KONFIRMASI</button>
 				</div>
 			</div>
 		</form>
@@ -54,76 +54,50 @@
 			{{ csrf_field() }}
 			<div class="row">
 				<div class="col-md-12">
-					<label for="purchaseBarcode">Barcode</label>
-					<select class="form-control select2" id="purchaseBarcode" name="product_id">
-						<option disabled selected>Pilih</option>
-						@foreach ($dataproduct as $element)
-						<option value="{{ $element->id }}">{{ $element->barcode }}</option>
-						@endforeach
-					</select>
+					<div class="input-group">
+						<input
+							id="purchaseBarcode" 
+							type="text" 
+							class="form-control select2" 
+							name="name" 
+							placeholder="Barcode"
+							aria-describedby="basic-addon1">
+						<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Cari barang</button>
+			      </span>
+					</div>
 				</div>
-				<div class="col-md-12">
-					<label for="">Nama Barang</label>
-					<select class="form-control select2" id="namabarang" name="name">
-						<option disabled selected>Pilih</option>
-						@foreach ($dataproduct as $element)
-						<option value="{{ $element->id }}">{{ $element->name }}</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group qty">
-						<label for="qty">Qty</label>
+				<div class="col-md-6" style="padding-top: 10px;">
+					{{-- <label for="qty"></label> --}}
+					<div class="input-group">
+						<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+			        	<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			        </button>
+			      </span>
 						<input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity">
+						<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+			        	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			        </button>
+			      </span>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="form-group harga">
-						<label for="hargaBeli">Harga Beli</label>
-						<input disabled id="hargaBeli" type="text" class="form-control hargaBeli" id="hargaBeli" placeholder="Harga Beli">
-						<input type="hidden" name="price" class="hargaBeli">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group harga">
-						<label for="productUnit">Unit</label>
-						<input disabled type="text" class="form-control" id="productUnit" placeholder="Unit">
-					</div>
-				</div>
-				<div class="col-md-6">
-					{{-- <div class="form-group">
-						<label for="productName">Nama Barang</label>
-						<input disabled type="text" class="form-control" id="productName" placeholder="Nama Barang">
-					</div> --}}
-					<div class="form-group qty">
-						<label for="totalHarga">Total Harga</label>
-						<input disabled type="text" class="form-control totalHarga" id="totalHarga" placeholder="Total Harga">
-						<input type="hidden" name="total" class="totalHarga">
-					</div>
-				</div>
-				<div class="center">
-					<button id="simpanPembelian" class="btn btn-default">SIMPAN PEMBELIAN</button>
-					<button id="btnTambah" class="btn btn-default">Tambah</button>
-				</div>
-				<div class="well" style="margin-top: 20px;">
-					* Kuantitas barang akan otomatis bertambah jika klik "simpan"
+				<div class="col-md-6" style="padding-top: 10px;">
+					<button id="simpanPembelian" class="btn btn-default btn-block">SIMPAN</button>
 				</div>
 			</div>
 		</form>
+		<div class="well" style="margin-top: 20px;">
+			* Barang akan otomatis bertambah jika klik "simpan"
+		</div>
 	</div>
 </div>
-
-{{-- <h1>Input Detail Pembelian</h1>
-
-
-<div class="center">
-	
-</div> --}}
 
 <style>
 	.qty, .harga{
 		/*width: 48%;*/
-		display: inline-block;
+		/*display: inline-block;*/
 	}
 
 	.qty{
@@ -154,32 +128,32 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		$(".select2").select2();
+		$("#supplierId").select2(); //plugin
 
-		$('#namabarang').change(function(){
-			var idproduct = $(this).val();
-			var idsupplier = $("#supplierId option:selected").val();
-			var tipebeli = $('#tipepembelian').val();
+		// $('#namabarang').change(function(){
+		// 	var idproduct = $(this).val();
+		// 	var idsupplier = $("#supplierId option:selected").val();
+		// 	var tipebeli = $('#tipepembelian').val();
 
-			$.ajax({
-				url: '{{ url("databarang") }}' + '/' + idsupplier + '/' + idproduct + '/' + tipebeli,
-				type: 'GET',
-				dataType: 'JSON',
-				success: function(data){
-					for(var i in data){
-						// $('.hargaBeli').val(data[i].price);
-						// $('#namabarang').val(idproduct).change();
-						// $('#productUnit').val(data[i].unit);
-						var pivot = data[i].pivot;
-					}
-					if(data.length === 0){
-						$('#myModal').modal('show')
-					}else{
-						$('.hargaBeli').val(pivot.price);
-					}
-				}
-			})
-		});
+		// 	$.ajax({
+		// 		url: '{{ url("databarang") }}' + '/' + idsupplier + '/' + idproduct + '/' + tipebeli,
+		// 		type: 'GET',
+		// 		dataType: 'JSON',
+		// 		success: function(data){
+		// 			for(var i in data){
+		// 				// $('.hargaBeli').val(data[i].price);
+		// 				// $('#namabarang').val(idproduct).change();
+		// 				// $('#productUnit').val(data[i].unit);
+		// 				var pivot = data[i].pivot;
+		// 			}
+		// 			if(data.length === 0){
+		// 				$('#myModal').modal('show')
+		// 			}else{
+		// 				$('.hargaBeli').val(pivot.price);
+		// 			}
+		// 		}
+		// 	})
+		// });
 
 		setInterval(function(){
 			$.ajax({
@@ -189,29 +163,6 @@
 				}
 			})
 		}, 1000);
-
-		$('#qty').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		$('#hargaBeli').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		$('#totalHarga').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		function total(){
-			var qty = $('#qty').val();
-			var harga = $('#hargaBeli').val();
-			var totalharga = qty * harga;
-			return totalharga;
-
-		}
 
 		$('#btnTambah').click(function(event) {
 			event.preventDefault();
@@ -226,18 +177,6 @@
 			})
 		});
 
-		$('#btnTambah').click(function(event) {
-			event.preventDefault();
-			var dt = $('#formTambahBarang').serialize();
-			$.ajax({
-				data: dt,
-				url: '{{ url('tambahdetailpembelian') }}',
-				type: 'POST',
-				success: function(data){
-					data;
-				}
-			})
-		});
 		$('#simpanPembelian').click(function(event) {
 			event.preventDefault();
 			var bc = $('#simpanPembelianForm').serialize();
