@@ -31,7 +31,6 @@ Route::get('/product/{id}/edit', 'ProductController@edit');
 Route::put('/product/{id}/', 'ProductController@update');
 Route::get('/product/{id}/delete', 'ProductController@delete');
 
-
 Route::get('/customer', 'CustomerController@view');
 Route::get('/customer/create', 'CustomerController@create');
 Route::post('/customer', 'CustomerController@store');
@@ -75,11 +74,8 @@ Route::get('/tabledetailpenjualan', 'SaleController@table');
 
 // UNTUK COBA DICOBA COBA BA BA BA BA BA
 Route::get('/test/{type?}', 'HomeController@transaction');
-Route::get('/barang/{barcode}', 'HomeController@additem');
 Route::get('/testbarang/{supplier}/{barcode}/{type}', 'HomeController@testbarang');
-
-
-
+Route::get('/supplierprice/{barcode}/{supplier}/{type}', 'ProductController@purchase');
 
 
 

@@ -10,7 +10,7 @@ $('#purchaseBarcode').scannerDetection({
       type: "GET",
       dataType: "json",
       cache: false,
-      url: '/barang/'+barcode,
+      url: '/product/'+barcode,
       success: function(data){
         for(var i in data){
           console.log(data[i].name);
@@ -21,39 +21,29 @@ $('#purchaseBarcode').scannerDetection({
         }
       }
     })
-    .done(function(data){
-      console.log(data);
-      // console.log(window.trancType);
-    });
-  }, // main callback function ,
-  onError: function(string, qty) {
-    // $('#userInput').val ($('#userInput').val() + string);
-  }
+    .done(function(data){});
+  },
+  onError: function(string, qty) {}
 });
 
-// $("#purchaseBarcode").change(function(e){
-//   e.preventDefault;
-//   cekBarcode($("#purchaseBarcode option:selected").text());
-// });
+function showModalPage(data,barcode,title){
+  $.get(data).done(function(result){
+    $('#modalPage').find('div.modal-body').empty().append(result);
+    $('#modalPage').find('#inputBarcode').val(barcode);
+  });
+  // $('#modalPage').find('h4.modal-title').text(title);
+  $('#modalPage').modal('show');
+}
 
-function cekBarcode(barcode){
-  $.ajax({
+function showModalInfo(content){
+  $('#modalInfo').find('div.modal-body>p').text(content);
+  $('#modalInfo').modal('show');
+}
+
+function productSupplier(barcode,supplier,type){
+  return $.ajax({
     type: "GET",
-    dataType: "json",
     cache: false,
-    url: '/barang/'+barcode,
-    success: function(data){
-      for(var i in data){
-        console.log(data[i].name);
-        // console.log(data[i].name);
-        // $('#purchaseBarcode').val(data[i].id).change();
-        $('#namabarang').val(data[i].id).change();
-        $('#qty').val(1);
-      }
-    }
-  })
-  .done(function(data){
-    console.log(data);
-    // console.log(window.trancType);
-  }); // main callback function ,
+    url: '/supplierprice/'+barcode+'/'+supplier+'/'+type,
+  });
 }

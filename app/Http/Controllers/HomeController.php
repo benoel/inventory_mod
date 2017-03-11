@@ -24,15 +24,6 @@ class HomeController extends Controller
     return view('transaction', compact('type','products'));
   }
 
-  function additem($barcode)
-  {
-    $product = Product::where('barcode',$barcode)
-      ->select('id','name','price_sale')
-      ->get();
-
-    return response($product);
-  }
-
   function testbarang($supplier,$barcode,$type){
     $supplier = Supplier::find($supplier)
       ->products()

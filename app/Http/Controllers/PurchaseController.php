@@ -152,13 +152,15 @@ class PurchaseController extends Controller
 	}
 
 	function tambahdetail(Request $request){
-		PurchaseDetailProduct::create([
-			'product_id' => $request->product_id,
-			'quantity' => $request->quantity,
-			'price' => $request->price,
-			'total' => $request->total,
+		// Purchase::create([
+		DB::table('purchases')->insert([
+			'purchase_number' => $request->purchase_number,
+			'supplier_id' 		=> $request->supplier_id,
+			'type' 						=> $request->type,
+			'note' 						=> $request->note,
 			]);
-		return 'oke COEG!!';
+		// dd($request->id);
+		// return $request->lastInsertId;
 	}
 
 	function table(){
