@@ -35,7 +35,6 @@
 					<label for="1">Status Pembelian</label>
 					<select class="form-control" id="tipepembelian" name="type">
 						<option value="open" selected>Progress</option>
-						<option value="hold">Tunda</option>
 						<option value="close">Lunas</option>
 					</select>
 				</div>
@@ -56,31 +55,31 @@
 				<div class="col-md-12">
 					<div class="input-group">
 						<input
-							id="purchaseBarcode" 
-							type="text" 
-							class="form-control select2" 
-							name="name" 
-							placeholder="Barcode"
-							aria-describedby="basic-addon1">
+						id="purchaseBarcode" 
+						type="text" 
+						class="form-control select2" 
+						name="name" 
+						placeholder="Barcode"
+						aria-describedby="basic-addon1">
 						<span class="input-group-btn">
-			        <button class="btn btn-default" type="button">Cari barang</button>
-			      </span>
+							<button class="btn btn-default" type="button">Cari barang</button>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-6" style="padding-top: 10px;">
 					{{-- <label for="qty"></label> --}}
 					<div class="input-group">
 						<span class="input-group-btn">
-			        <button class="btn btn-default" type="button">
-			        	<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-			        </button>
-			      </span>
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+							</button>
+						</span>
 						<input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity">
 						<span class="input-group-btn">
-			        <button class="btn btn-default" type="button">
-			        	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-			        </button>
-			      </span>
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</button>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-6" style="padding-top: 10px;">
