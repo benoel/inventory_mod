@@ -44,7 +44,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="{{url('purchase/create')}}">
+						<a href="{{ url('purchase/create') }}" id="createPurchase">
 							<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Pembelian
 						</a>
 					</li>
@@ -98,25 +98,41 @@
 	@yield('content')
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Modal title</h4>
+				<h4 class="modal-title">Oops...!</h4>
 			</div>
-			<div class="modal-body">
-				<p>One fine body&hellip;</p>
-			</div>
+			<div class="modal-body"><p></p></div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">OKE</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modalPage" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			{{-- <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div> --}}
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">TUTUP</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 <script src="{{ url('js/typeahead.bundle.js') }}"></script>
 <script src="{{ url('js/transaction.js') }}"></script>

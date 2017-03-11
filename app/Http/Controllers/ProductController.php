@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
-
+use App\Supplier;
 
 class ProductController extends Controller
 {
@@ -61,5 +61,28 @@ class ProductController extends Controller
 		return redirect('product');
 	}
 
+	function purchase($barcode,$supplier,$type)
+	{
+		$product = Product::where('barcode',$barcode)->first();
 
+		if($product != null){
+			$supp = Supplier::find($supplier)
+			->products()->select('name')
+			->where('barcode',$barcode)
+			->wherePivot('type',$type)
+			->first();
+
+			if($supp != null) {
+				$price = number_format($supp->pivot->price);
+				$productname = $product->name;
+
+				return response(compact('productname','price'));
+    		// return 'ada';
+			}else{
+				return 'noprice';
+			}    
+		}else{
+			return 'noproduct';
+		}
+	}
 }

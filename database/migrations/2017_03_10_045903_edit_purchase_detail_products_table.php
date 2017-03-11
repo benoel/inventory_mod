@@ -13,7 +13,10 @@ class EditPurchaseDetailProductsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->integer('total_price')->unsigned()->nullable()->change();
+            $table->string('status')->default('open')->after('type');
+        });
     }
 
     /**
@@ -23,6 +26,9 @@ class EditPurchaseDetailProductsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->integer('total_price')->unsigned()->change();
+            $table->dropColumn('status');
+        });
     }
 }
