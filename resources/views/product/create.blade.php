@@ -1,5 +1,5 @@
-{{-- @extends('layouts.default') --}}
-{{-- @section('content') --}}
+@extends('layouts.default')
+@section('content')
 <h1>Tambah product</h1>
 <div class="row">
 	<div class="col-md-6">
@@ -40,4 +40,4 @@
 		</form>
 	</div>
 </div>
-{{-- @endsection --}}
+@endsection

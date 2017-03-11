@@ -51,9 +51,9 @@ Route::get('/purchase', 'PurchaseController@view');
 Route::get('/purchase/create', 'PurchaseController@create');
 Route::post('/purchase', 'PurchaseController@store');
 // Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
-// Route::put('/purchase/{id}/', 'PurchaseController@update');
+Route::get('/purchase/{purchase_number}', 'PurchaseController@purchasedetail');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
-Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
+// Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
 
 Route::get('/sale', 'SaleController@view');
 Route::get('/sale/create', 'SaleController@create');

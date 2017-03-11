@@ -169,13 +169,18 @@ class PurchaseController extends Controller
 	}
 
 	function purchasedetail($purchase_number){
-		$datadetail = Purchase::where('purchase_number', $purchase_number)->get();
-		$salenumber = $purchase_number;
-		$databarang = PurchaseDetail::where('purchase_number', $purchase_number)->get();
+		$datadetail = Purchase::where('purchase_number', $purchase_number)
+			->with('purchasedetails','supplier')
+			->first();
 
-		return view('purchase.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+		$price = Supplier::find($datadetail->supplier_id)
+			->products()
+			->wherePivot('type',$datadetail->type)
+			->get();
+
+		// return view('purchase.purchasing', compact('datadetail'));
+		return response([$datadetail,$price]);
 	}
-
 }
 
 
