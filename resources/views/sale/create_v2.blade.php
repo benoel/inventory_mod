@@ -1,20 +1,12 @@
 @extends('layouts.default')
 @section('content')
 <div class="row">
-	<div class="col-md-8">
-		<div>
-			<h2 class="">No : {{ $salenumber }}</h2>
-		</div>
-		<div class="divider"></div>
-		<div id="table"></div>
-	</div>
-
-	<div class="col-md-4">
+	<div class="col-md-4 col-md-offset-4">
 		<form id="simpanPenjualanForm" action="POST">
 			{{ csrf_field() }}
 			<div class="row">
 				<div class="col-md-12">
-					<input type="hidden" value="{{ $salenumber }}" name="sale_number">
+					<input type="hidden" id="salenumber" value="{{ $salenumber }}" name="sale_number">
 					<label for="1">Nama Customer</label>
 					<select class="form-control select2" id="customerId" name="customer_id">
 						<option disabled selected>Pilih</option>
@@ -31,26 +23,20 @@
 						<option value="deliver">Deliver</option>
 					</select>
 				</div>
-				<div class="col-md-6">
-					<label for="1">Status Pembelian</label>
-					<select class="form-control" id="tipepembelian" name="type">
-						<option disabled selected>Progress</option>
-						<option value="pickup">Tunda</option>
-						<option value="deliver">COD</option>
-						<option value="deliver">Lunas</option>
-					</select>
-				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="2">Note</label>
 						<textarea class="form-control" rows="3" class="form-control" rows="3" name="note" id="" cols="30" rows="10"></textarea>
 					</div>
 				</div>
+				<div class="col-md-12" style="padding-top: 10px;">
+					<button id="buatSale" class="btn btn-default">KONFIRMASI</button>
+				</div>
 			</div>
 		</form>
-		<div class="divider"></div>
+		{{-- <div class="divider"></div> --}}
 
-		<form id="formTambahBarang" method="POST">
+		{{-- <form id="formTambahBarang" method="POST">
 			{{ csrf_field() }}
 			<div class="row">
 				<div class="col-md-12">
@@ -91,10 +77,6 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					{{-- <div class="form-group">
-						<label for="productName">Nama Barang</label>
-						<input disabled type="text" class="form-control" id="productName" placeholder="Nama Barang">
-					</div> --}}
 					<div class="form-group qty">
 						<label for="totalHarga">Total Harga</label>
 						<input disabled type="text" class="form-control totalHarga" id="totalHarga" placeholder="Total Harga">
@@ -111,7 +93,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		</form> --}}
 	</div>
 </div>
 
@@ -156,79 +138,93 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		$(".select2").select2();
+		$("#customerId").select2();
 
-		$('#barcode').change(function(){
-			var idproduct = $(this).val();
-			$.ajax({
-				url: '{{ url("databarangpenjualan") }}' + '/' + idproduct,
-				type: 'GET',
-				success: function(data){
-					console.log(data);
-					$('#namabarang').val(data.id).change();
-					$('#productUnit').val(data.unit);
-					$('.hargaBeli').val(data.price_sale)
-				}
-			})
-		});
-
-		setInterval(function(){
-			$.ajax({
-				url: '{{ url('tabledetailpenjualan') }}',
-				success: function(data){
-					$('#table').html(data);
-				}
-			})
-		}, 1000);
-
-		$('#qty').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		$('#hargaBeli').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		$('#totalHarga').keyup(function() {
-			var jm = total();
-			$('.totalHarga').val(jm);
-		});
-
-		function total(){
-			var qty = $('#qty').val();
-			var harga = $('#hargaBeli').val();
-			var totalharga = qty * harga;
-			return totalharga;
-
-		}
-
-		$('#btnTambah').click(function(event) {
+		$('#buatSale').click(function(event) {
 			event.preventDefault();
-			var dt = $('#formTambahBarang').serialize();
+			var dt = $('#simpanPenjualanForm').serialize();
+			var pn = $('#salenumber').val();
 			$.ajax({
 				data: dt,
 				url: '{{ url('tambahdetailpenjualan') }}',
 				type: 'POST',
 				success: function(data){
-					console.log(data);
+					window.location.href = '{{ url('sale') }}' + '/' + pn;
 				}
 			})
 		});
 
-		$('#simpanPembelian').click(function(event) {
-			event.preventDefault();
-			var bc = $('#simpanPenjualanForm').serialize();
-			$.ajax({
-				data: bc,
-				url: '{{ url('sale') }}',
-				type: 'POST',
-				success: function(data){
-					window.location.href = '{{ url('sale') }}';
-				}
-			})
-		});
+		// $('#barcode').change(function(){
+		// 	var idproduct = $(this).val();
+		// 	$.ajax({
+		// 		url: '{{ url("databarangpenjualan") }}' + '/' + idproduct,
+		// 		type: 'GET',
+		// 		success: function(data){
+		// 			console.log(data);
+		// 			$('#namabarang').val(data.id).change();
+		// 			$('#productUnit').val(data.unit);
+		// 			$('.hargaBeli').val(data.price_sale)
+		// 		}
+		// 	})
+		// });
+
+		// setInterval(function(){
+		// 	$.ajax({
+		// 		url: '{{ url('tabledetailpenjualan') }}',
+		// 		success: function(data){
+		// 			$('#table').html(data);
+		// 		}
+		// 	})
+		// }, 1000);
+
+		// $('#qty').keyup(function() {
+		// 	var jm = total();
+		// 	$('.totalHarga').val(jm);
+		// });
+
+		// $('#hargaBeli').keyup(function() {
+		// 	var jm = total();
+		// 	$('.totalHarga').val(jm);
+		// });
+
+		// $('#totalHarga').keyup(function() {
+		// 	var jm = total();
+		// 	$('.totalHarga').val(jm);
+		// });
+
+		// function total(){
+		// 	var qty = $('#qty').val();
+		// 	var harga = $('#hargaBeli').val();
+		// 	var totalharga = qty * harga;
+		// 	return totalharga;
+
+		// }
+
+		// $('#btnTambah').click(function(event) {
+		// 	event.preventDefault();
+		// 	var dt = $('#formTambahBarang').serialize();
+		// 	$.ajax({
+		// 		data: dt,
+		// 		url: '{{ url('tambahdetailpenjualan') }}',
+		// 		type: 'POST',
+		// 		success: function(data){
+		// 			console.log(data);
+		// 		}
+		// 	})
+		// });
+
+		// $('#simpanPembelian').click(function(event) {
+		// 	event.preventDefault();
+		// 	var bc = $('#simpanPenjualanForm').serialize();
+		// 	$.ajax({
+		// 		data: bc,
+		// 		url: '{{ url('sale') }}',
+		// 		type: 'POST',
+		// 		success: function(data){
+		// 			window.location.href = '{{ url('sale') }}';
+		// 		}
+		// 	})
+		// });
 
 
 

@@ -51,17 +51,17 @@ Route::get('/purchase', 'PurchaseController@view');
 Route::get('/purchase/create', 'PurchaseController@create');
 Route::post('/purchase', 'PurchaseController@store');
 // Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
-// Route::put('/purchase/{id}/', 'PurchaseController@update');
+Route::get('/purchase/{purchase_number}', 'PurchaseController@purchasedetail');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
-Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
+// Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
 
 Route::get('/sale', 'SaleController@view');
 Route::get('/sale/create', 'SaleController@create');
 Route::post('/sale', 'SaleController@store');
 // Route::get('/sale/{id}/edit', 'SaleController@edit');
-// Route::put('/sale/{id}/', 'SaleController@update');
+Route::get('/sale/{sale_number}', 'SaleController@saledetail');
 Route::get('/sale/{id}/delete', 'SaleController@delete');
-Route::get('/sale/{id}/detail', 'SaleController@saledetail');
+// Route::get('/sale/{id}/detail', 'SaleController@saledetail');
 
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');
@@ -76,6 +76,7 @@ Route::get('/tabledetailpenjualan', 'SaleController@table');
 Route::get('/test/{type?}', 'HomeController@transaction');
 Route::get('/testbarang/{supplier}/{barcode}/{type}', 'HomeController@testbarang');
 Route::get('/supplierprice/{barcode}/{supplier}/{type}', 'ProductController@purchase');
+Route::get('/supplierprice/{barcode}', 'ProductController@sale');
 
 
 

@@ -85,4 +85,8 @@ class ProductController extends Controller
 			return 'noproduct';
 		}
 	}
+
+	function sale($barcode){
+		
+	}
 }

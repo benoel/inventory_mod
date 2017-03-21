@@ -87,47 +87,47 @@
 				url: '{{ url('tambahdetailpembelian') }}',
 				type: 'POST',
 				success: function(data){
-					window.location.href = '{{ url('purchase/') }}' + pn;
+					window.location.href = '{{ url('purchase') }}' + '/' + pn;
 				}
 			})
 		});
 
 
-		$('#purchaseBarcode').keypress(function(event){
-			var supplier = $('#supplierId option:selected').val();
-			var type = $('#tipepembelian option:selected').val();
-			var barcode = $(this).val();  
+		// $('#purchaseBarcode').keypress(function(event){
+		// 	var supplier = $('#supplierId option:selected').val();
+		// 	var type = $('#tipepembelian option:selected').val();
+		// 	var barcode = $(this).val();  
 
-			if (event.which == 13) {
-				event.preventDefault();
-				productSupplier(barcode,supplier,type).done(function(result){
-					if(result == 'noproduct'){
-						showModalInfo('Nama barang tidak tersedia, silahkan tambah data baru.');
-						$('#tambahProduct').prop('disabled',false);
-					}else if(result == 'noprice'){
-						showModalInfo('Data harga barang belum tersedia, silahkan buat baru?');
-					}else{
-						$('table>tbody').append(
-							'<tr><td>!</td>'+
-							'<td>'+result.productname+'</td>'+
-							'<td>'+result.price+'</td>'+
-							'<td>1</td>'+
-							'<td></td>'+
-							'</tr>'
-							);
-			    	// $('#purchaseBarcode').val('');
-			    	$('#qty').val(1).focus();
-			    }
-			})
-				.fail();
-			}
-		});
+		// 	if (event.which == 13) {
+		// 		event.preventDefault();
+		// 		productSupplier(barcode,supplier,type).done(function(result){
+		// 			if(result == 'noproduct'){
+		// 				showModalInfo('Nama barang tidak tersedia, silahkan tambah data baru.');
+		// 				$('#tambahProduct').prop('disabled',false);
+		// 			}else if(result == 'noprice'){
+		// 				showModalInfo('Data harga barang belum tersedia, silahkan buat baru?');
+		// 			}else{
+		// 				$('table>tbody').append(
+		// 					'<tr><td>!</td>'+
+		// 					'<td>'+result.productname+'</td>'+
+		// 					'<td>'+result.price+'</td>'+
+		// 					'<td>1</td>'+
+		// 					'<td></td>'+
+		// 					'</tr>'
+		// 					);
+		// 	    	// $('#purchaseBarcode').val('');
+		// 	    	$('#qty').val(1).focus();
+		// 	    }
+		// 	})
+		// 		.fail();
+		// 	}
+		// });
 
-		$('#tambahProduct').click(function(){
-			var _url = '{{url("product/create")}}';
-			var barcode = $('#purchaseBarcode').val();
-			showModalPage(_url,barcode,'Tambah Barang');
-		});
+		// $('#tambahProduct').click(function(){
+		// 	var _url = '{{url("product/create")}}';
+		// 	var barcode = $('#purchaseBarcode').val();
+		// 	showModalPage(_url,barcode,'Tambah Barang');
+		// });
 
 
 		// $('#namabarang').change(function(){

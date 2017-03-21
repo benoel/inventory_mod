@@ -147,13 +147,12 @@ class SaleController extends Controller
 	}
 
 	function tambahdetail(Request $request){
-		SaleDetailProduct::create([
-			'product_id' => $request->product_id,
-			'quantity' => $request->quantity,
-			'price' => $request->price,
-			'total' => $request->total,
+		Sale::create([
+			'sale_number' => $request->sale_number,
+			'customer_id' => $request->customer_id,
+			'type' => $request->type,
+			'note' => $request->note,
 			]);
-		return 'oke COEG!!';
 	}
 
 	function table(){
@@ -162,11 +161,23 @@ class SaleController extends Controller
 	}
 
 	function saledetail($sale_number){
-		$datadetail = Sale::where('sale_number', $sale_number)->get();
-		$salenumber = $sale_number;
-		$databarang = SaleDetail::where('sale_number', $sale_number)->get();
+		// $datadetail = Sale::where('sale_number', $sale_number)->get();
+		// $salenumber = $sale_number;
+		// $databarang = SaleDetail::where('sale_number', $sale_number)->get();
 
-		return view('sale.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+		// return view('sale.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+		$datadetail = sale::where('sale_number', $sale_number)
+		->first();
+
+		// $price = Supplier::find($datadetail->supplier_id)
+		// ->products()
+		// ->wherePivot('type',$datadetail->type)
+		// ->get();
+
+		$dataproduct = Product::all();
+
+
+		return view('sale.saling', compact('datadetail', 'dataproduct'));
 	}
 
 }
