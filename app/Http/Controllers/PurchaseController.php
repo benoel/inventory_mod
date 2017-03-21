@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 // use Illuminate\Support\Facades\DB;
 use App\Purchase;
 use App\Supplier;
@@ -178,9 +179,66 @@ class PurchaseController extends Controller
 			->wherePivot('type',$datadetail->type)
 			->get();
 
-		// return view('purchase.purchasing', compact('datadetail'));
-		return response([$datadetail,$price]);
+		if($datadetail->status == 'open'){
+			$dtstatus = '';
+		}else{
+			$dtstatus = 'disabled';
+		}
+
+		return view('purchase.purchasing', compact('datadetail','price','dtstatus'));
+		// return response([$datadetail,$price]);
 	}
+
+	function product_store(Request $request)
+	{
+		$product = Product::create([
+			'name' => $request->name,
+			'barcode' => $request->barcode,
+			'unit' => $request->unit,
+			'stock' => $request->stock,
+			'price_sale' => $request->price_sale,
+			'category_id' => $request->category_id,
+		]);
+
+		$product->suppliers()->attach(
+			['supplier_id' => $request->sid],
+			[
+				'type' => $request->_tipe,
+				'price' => $request->price_buy
+			]
+		);
+
+		$product->purchasedetails()->create([
+			'purchase_number' => $request->purNumber,
+			'quantity' => $request->stock,
+			'price' => $request->price_buy,
+			'total' => $request->price_buy * $request->stock
+		]);
+
+		return 'success';
+	}
+
+	function close(Request $request)
+  {
+  	$grandTotal = 0;
+  	foreach ($request->rows as $key) {
+  		$dtproduct = Product::find($key['productid']);
+  		$dtproduct->update([
+  			'stock' => $dtproduct->stock + $key['quantity'],
+  		]);
+  		$grandTotal += $key['total'];
+  	}
+
+  	Purchase::where('purchase_number',$request->purNumber)->update([
+  		'status' => 'close',
+  		'total_price' => $grandTotal,
+  	]);
+  	// $saw = array_sum($request->rows['total']);
+  	// return response()->json($request->rows['total']);
+  	// return redirect('');//->action('purchases');
+  	// return response()->json($grandTotal);
+  	return 'success';
+  }
 }
 
 

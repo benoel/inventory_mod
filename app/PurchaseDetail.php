@@ -9,7 +9,7 @@ class PurchaseDetail extends Model
 	protected $guarded = [];
 	public function purchase()
 	{
-		return $this->belongsTo('App\Purchase');
+		return $this->belongsTo('App\Purchase', 'purchase_number');
 	}
 
 	public function product()

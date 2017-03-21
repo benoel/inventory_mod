@@ -33,10 +33,10 @@ class Product extends Model
 		return $this->hasMany('App\SaleDetailProduct');
 	}
 
-	public function productsupplier()
-	{
-		return $this->belongsToMany('App\Supplier', 'product_suppliers')->withPivot('type','price');
-	}
+	// public function productsupplier()
+	// {
+	// 	return $this->belongsToMany('App\Supplier', 'product_suppliers')->withPivot('type','price');
+	// }
 
 	public function suppliers()
 	{
