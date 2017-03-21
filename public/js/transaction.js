@@ -1,4 +1,4 @@
-$('#purchaseBarcode').scannerDetection({  
+$('#purchaseBarcode,#qty').scannerDetection({  
   //https://github.com/kabachello/jQuery-Scanner-Detection
   timeBeforeScanTest: 200, // wait for the next character for upto 200ms
   avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
@@ -15,9 +15,9 @@ $('#purchaseBarcode').scannerDetection({
         for(var i in data){
           console.log(data[i].name);
           // console.log(data[i].name);
-          // $('#purchaseBarcode').val(data[i].id).change();
+          $('#purchaseBarcode').val(data[i].id).change();
           // $('#namabarang').val(data[i].id).change();
-          $('#qty').val(1);
+          $('#qty').focus();
         }
       }
     })
@@ -97,13 +97,14 @@ function showModalForm(data){
     $('#modalForm').find('#purNumber').val(data.pnumber);
     $('#modalForm').find('#_tipe').val(data.type);
     $('#modalForm').find('#_supplier').val(data.supplier_name);
+    $('#modalForm').find('#inputBarcode').val(data.barcode);
 
     if(data.title == "Tambah Harga"){
       $('#modalForm').find('#proId').val(data.product_id);
       $('#modalForm').find('#_barang').val(data.product_name);
       $('#modalForm').find('#_harga').focus();
-    }else if(data.title = "Tambah Barang"){
-      $('#modalForm').find('#inputBarcode').val(data.barcode);
+    // }else if(data.title = "Tambah Barang"){
+      
     }
   });
 

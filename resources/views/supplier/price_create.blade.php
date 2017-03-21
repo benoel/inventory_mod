@@ -3,6 +3,7 @@
   {{ csrf_field() }}
   <input name="sid" type="hidden" class="form-control" id="sid">
   <input name="proId" type="hidden" class="form-control" id="proId">
+  <input name="barcode" type="hidden" class="form-control" id="inputBarcode">
   <input name="purNumber" type="hidden" class="form-control" id="purNumber">
   <div class="row">
     <div class="col-md-12">
@@ -48,6 +49,7 @@
     var addlist = {
       productid: $('#proId').val(),
       productname: $('#_barang').val(),
+      barcode: $('#inputBarcode').val(),
       quantity: $('#_qty').val(),
       price: $('#_harga').val()
     };

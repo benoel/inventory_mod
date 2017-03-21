@@ -63,6 +63,7 @@
     var addlist = {
       productid: $('#proId').val(),
       productname: $('#_barang').val(),
+      barcode: $('#inputBarcode').val(),
       quantity: $('#3').val(),
       price: $('#price_buy').val()
     };

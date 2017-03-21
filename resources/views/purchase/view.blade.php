@@ -10,6 +10,7 @@
 			<th>Tipe</th>
 			<th>Total Pembelian</th>
 			<th>Tanggal</th>
+			<th>Status</th>
 			<th>Aksi</th>
 		</tr>
 	</thead>
@@ -21,6 +22,7 @@
 			<td>{{ $data->type }}</td>
 			<td>{{ $data->total_price }}</td>
 			<td>{{ $data->created_at }}</td>
+			<td>{{ $data->status }}</td>
 			<td>
 				<a href="{{ url('purchase/'. $data->purchase_number) }}">View</a> 
 				{{-- || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a>  --}}
