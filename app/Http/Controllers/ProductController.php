@@ -64,8 +64,12 @@ class ProductController extends Controller
 	function purchase($barcode,$supplier,$type)
 	{
 		$product = Product::where('barcode',$barcode)->first();
+		$price = '';
+		$quantity = 1;
 
 		if($product != null){
+			$productid = $product->id;
+			$productname = $product->name;
 			$supp = Supplier::find($supplier)
 			->products()->select('name')
 			->where('barcode',$barcode)
@@ -73,20 +77,18 @@ class ProductController extends Controller
 			->first();
 
 			if($supp != null) {
-				$price = number_format($supp->pivot->price);
-				$productname = $product->name;
+				$price = $supp->pivot->price;
+			}
 
-				return response(compact('productname','price'));
-    		// return 'ada';
-			}else{
-				return 'noprice';
-			}    
+			return response(compact(
+				'productid',
+				'productname',
+				'price',
+				'quantity',
+				'barcode'
+				));
 		}else{
 			return 'noproduct';
 		}
-	}
-
-	function sale($barcode){
-		
 	}
 }

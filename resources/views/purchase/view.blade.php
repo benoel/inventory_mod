@@ -5,22 +5,24 @@
 <table id="inventoryTable" class="display">
 	<thead>
 		<tr>
+			<th>Note</th>
 			<th>Nama Supplier</th>
 			<th>Tipe</th>
-			<th>Note</th>
 			<th>Total Pembelian</th>
+			<th>Tanggal</th>
 			<th>Aksi</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($datapurchase as $data)
 		<tr>
+			<td>{{ $data->purchase_number }}</td>
 			<td>{{ $data->supplier->name }}</td>
 			<td>{{ $data->type }}</td>
-			<td>{{ $data->note }}</td>
 			<td>{{ $data->total_price }}</td>
+			<td>{{ $data->created_at }}</td>
 			<td>
-				<a href="{{ url('purchase/'. $data->purchase_number .'/detail') }}">View</a> 
+				<a href="{{ url('purchase/'. $data->purchase_number) }}">View</a> 
 				{{-- || <a href="{{ url('purchase/'. $data->id .'/delete') }}">Delete</a>  --}}
 			</td>
 		</tr>
@@ -36,7 +38,12 @@
 
 <script>
 	$(document).ready(function () {
-		$('#inventoryTable').DataTable();
+		$('#inventoryTable').DataTable({
+			"order": [[0,"desc"]],
+			"language": {
+				"thousands": ","
+			}
+		});
 	});
 </script>
 

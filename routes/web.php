@@ -47,13 +47,30 @@ Route::put('/category/{id}/', 'CategoryController@update');
 Route::get('/category/{id}/delete', 'CategoryController@delete');
 
 
-Route::get('/purchase', 'PurchaseController@view');
+Route::get('/purchases', 'PurchaseController@view');
 Route::get('/purchase/create', 'PurchaseController@create');
 Route::post('/purchase', 'PurchaseController@store');
 // Route::get('/purchase/{id}/edit', 'PurchaseController@edit');
 Route::get('/purchase/{purchase_number}', 'PurchaseController@purchasedetail');
 Route::get('/purchase/{id}/delete', 'PurchaseController@delete');
 // Route::get('/purchase/{id}/detail', 'PurchaseController@purchasedetail');
+
+// PURCHASING ROUTES
+Route::post('/purchasedetail', 'PurchaseDetailController@store');
+Route::put('/purchasedetail', 'PurchaseDetailController@update');
+Route::get('/purchasedetail/{purchase_number}/{id}/delete', 'PurchaseDetailController@delete');
+Route::post('/purchaseclose', 'PurchaseController@close');
+Route::get('/purchaseproduct', function(){
+	$category = App\Category::all();
+	return view('purchase.product_create', compact('category'));
+});
+Route::post('/purchaseproduct', 'PurchaseController@product_store');
+Route::get('/supplierprice', function(){
+	return view('supplier.price_create');
+});
+Route::post('/supplierprice', 'SupplierController@price_store');
+Route::get('/supplierprice/{barcode}/{supplier}/{type}', 'ProductController@purchase');
+
 
 Route::get('/sale', 'SaleController@view');
 Route::get('/sale/create', 'SaleController@create');
@@ -75,8 +92,11 @@ Route::get('/tabledetailpenjualan', 'SaleController@table');
 // UNTUK COBA DICOBA COBA BA BA BA BA BA
 Route::get('/test/{type?}', 'HomeController@transaction');
 Route::get('/testbarang/{supplier}/{barcode}/{type}', 'HomeController@testbarang');
-Route::get('/supplierprice/{barcode}/{supplier}/{type}', 'ProductController@purchase');
-Route::get('/supplierprice/{barcode}', 'ProductController@sale');
+Route::get('/barcode/{id}', function($id){
+	$product = App\Product::find($id)->with('suppliers','purchasedetails')->first();
+	return $product;
+});
+
 
 
 

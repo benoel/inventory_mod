@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Inventory_mod</title>
 	<link rel="stylesheet" href="{{ url('css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ url('css/style.css') }}">
@@ -63,8 +64,8 @@
 						><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Master <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{url('purchase')}}">List Penjualan</a></li>
-						<li><a href="{{url('sale')}}">List Pembelian</a></li>
+						<li><a href="{{url('purchases')}}">List Pembelian</a></li>
+						<li><a href="{{url('sale')}}">List Penjualan</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{{url('product')}}">Barang</a></li>
 						<li><a href="{{url('category')}}">Kategori</a></li>
@@ -109,7 +110,7 @@
 			</div>
 			<div class="modal-body"><p></p></div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">OKE</button>
+				<button id="closeModalInfo" type="button" class="btn btn-primary" data-dismiss="modal">OKE</button>
 			</div>
 		</div>
 	</div>
@@ -132,7 +133,37 @@
 	</div>
 </div>
 
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body"></div>
+		</div>
+	</div>
+</div>
 
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Konfirmasi</h4>
+			</div>
+			<div class="modal-body"><p>Anda yakin akan menghapus data ?</p></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">BATAL</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" data-url="">HAPUS</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="{{ url('js/typeahead.bundle.js') }}"></script>
 <script src="{{ url('js/transaction.js') }}"></script>
