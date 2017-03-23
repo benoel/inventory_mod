@@ -71,7 +71,7 @@
 						<li><a href="{{url('category')}}">Kategori</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{{url('supplier')}}">Supplier</a></li>
-						<li><a href="{{url('costumer')}}">Customer</a></li>
+						<li><a href="{{url('customer')}}">Customer</a></li>
 					</ul>
 				</li>
 			</ul>

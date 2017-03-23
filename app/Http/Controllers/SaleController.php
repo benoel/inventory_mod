@@ -81,6 +81,25 @@ class SaleController extends Controller
 		return view('sale.create_v2', compact('salenumber', 'datacustomer', 'dataproduct'));
 	}
 
+	function product_store(Request $request){
+		$product = Product::create([
+			'name' => $request->name,
+			'barcode' => $request->barcode,
+			'unit' => $request->unit,
+			'stock' => $request->stock,
+			'price_sale' => $request->price_sale,
+			'category_id' => $request->category_id,
+			]);
+
+		$product->saledetails()->create([
+			'sale_number' => $request->salNumber,
+			'quantity' => $request->stock,
+			'price' => $request->price_sale,
+			'total' => $request->price_sale * $request->stock
+			]);
+		return "sukses";
+	}
+
 	function store(Request $request){
 		$abc = SaleDetailProduct::all();
 		$savepembelian = Sale::create([
@@ -166,18 +185,36 @@ class SaleController extends Controller
 		// $databarang = SaleDetail::where('sale_number', $sale_number)->get();
 
 		// return view('sale.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
-		$datadetail = sale::where('sale_number', $sale_number)
-		->first();
-
-		// $price = Supplier::find($datadetail->supplier_id)
-		// ->products()
-		// ->wherePivot('type',$datadetail->type)
-		// ->get();
-
-		$dataproduct = Product::all();
+		$datasaledetail = SaleDetail::where('sale_number', $sale_number)->get();
+		$datadetail = Sale::where('sale_number', $sale_number)->first();
+		if($datadetail->status == 'open'){
+			$dtstatus = '';
+		}else{
+			$dtstatus = 'disabled';
+		}
 
 
-		return view('sale.saling', compact('datadetail', 'dataproduct'));
+		// $dataproduct = Product::all();
+		return view('sale.saling', compact('datadetail', 'datasaledetail', 'dtstatus'));
+
+	}
+
+	function close(Request $request)
+	{
+		$grandTotal = 0;
+		foreach ($request->rows as $key) {
+			$dtproduct = Product::find($key['productid']);
+			$dtproduct->update([
+				'stock' => $dtproduct->stock + $key['quantity'],
+				]);
+			$grandTotal += $key['total'];
+		}
+
+		Sale::where('sale_number',$request->salNumber)->update([
+			'status' => 'close',
+			'total_price' => $grandTotal,
+			]);
+		return 'success';
 	}
 
 }

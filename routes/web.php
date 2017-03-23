@@ -64,14 +64,24 @@ Route::get('/purchaseproduct', function(){
 	$category = App\Category::all();
 	return view('purchase.product_create', compact('category'));
 });
+
+Route::get('/tambahbarang', function(){
+	$category = App\Category::all();
+	return view('sale.product_create', compact('category'));
+});
 Route::post('/purchaseproduct', 'PurchaseController@product_store');
+Route::post('/tambahbarang', 'SaleController@product_store');
 Route::get('/supplierprice', function(){
 	return view('supplier.price_create');
 });
 Route::post('/supplierprice', 'SupplierController@price_store');
 Route::get('/supplierprice/{barcode}/{supplier}/{type}', 'ProductController@purchase');
+Route::get('/checkproduct/{barcode}', 'ProductController@checkproduct');
 
 
+Route::post('/saleclose', 'SaleController@close');
+Route::get('/saledetail/{purchase_number}/{id}/delete', 'SaleDetailController@delete');
+Route::put('/saledetail', 'SaleDetailController@update');
 Route::get('/sale', 'SaleController@view');
 Route::get('/sale/create', 'SaleController@create');
 Route::post('/sale', 'SaleController@store');

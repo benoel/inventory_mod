@@ -91,4 +91,22 @@ class ProductController extends Controller
 			return 'noproduct';
 		}
 	}
+
+	function checkproduct($barcode){
+		$product = Product::where('barcode', $barcode)->first();
+		if ($product != null) {
+			$productid = $product->id;
+			$productname = $product->name;
+			$price = $product->price_sale;
+
+			return response(compact(
+				'productid',
+				'productname',
+				'price'
+				));
+
+		}else{
+			return 'noproduct';
+		}
+	}
 }

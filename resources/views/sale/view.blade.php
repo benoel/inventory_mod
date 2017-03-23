@@ -7,8 +7,9 @@
 		<tr>
 			<th>Nama Supplier</th>
 			<th>Tipe</th>
-			<th>Note</th>
 			<th>Total Pembelian</th>
+			<th>Tanggal</th>
+			<th>Status</th>
 			<th>Aksi</th>
 		</tr>
 	</thead>
@@ -17,10 +18,11 @@
 		<tr>
 			<td>{{ $data->customer->name }}</td>
 			<td>{{ $data->type }}</td>
-			<td>{{ $data->note }}</td>
 			<td>{{ $data->total_price }}</td>
+			<td>{{ $data->created_at }}</td>
+			<td>{{ $data->status }}</td>
 			<td>
-				<a href="{{ url('sale/'. $data->sale_number .'/detail') }}">View</a> 
+				<a href="{{ url('sale/'. $data->sale_number) }}">View</a> 
 				{{-- || <a href="{{ url('sale/'. $data->id .'/delete') }}">Delete</a>  --}}
 			</td>
 		</tr>

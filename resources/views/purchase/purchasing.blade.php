@@ -70,37 +70,33 @@
     aria-describedby="basic-addon1"
     data-id=""
     data-name=""
+    {{$dtstatus}}
     autofocus>
-          {{-- <span class="input-group-btn">
-            <button 
-              id="cariProduct" 
-              class="btn btn-default" 
-              type="button">
-              <span class="glyphicon glyphicon-search" aria-hidden="true">
-            </button>
-          </span> --}}
-        </div>
-      </div>
-      <div class="col-md-4" style="padding-top: 30px;">
-        <input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity">
-      </div>
-      <div class="col-md-4" style="padding-top: 30px;">
-        <button id="hapusItem" class="btn btn-danger btn-block">
-          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> HAPUS
-        </button>
-      </div>
-      <div class="col-md-4" style="padding-top: 30px;">
-        <button 
-        id="simpanPembelian" 
-        class="btn btn-success btn-block"
-        {{$dtstatus}}>
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> SELESAI
-      </button>
-    </div>
   </div>
-  <div class="well" style="margin-top: 20px;">
-    * Barang akan otomatis bertambah jika klik "simpan"
-  </div>
+</div>
+<div class="col-md-4" style="padding-top: 30px;">
+  <input name="quantity" type="text" class="form-control" id="qty" placeholder="Quantity" {{$dtstatus}}>
+</div>
+<div class="col-md-4" style="padding-top: 30px;">
+  <button 
+  id="hapusItem" 
+  class="btn btn-danger btn-block"
+  {{$dtstatus}}>
+  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> HAPUS
+</button>
+</div>
+<div class="col-md-4" style="padding-top: 30px;">
+  <button 
+  id="simpanPembelian" 
+  class="btn btn-success btn-block"
+  {{$dtstatus}}>
+  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> SELESAI
+</button>
+</div>
+</div>
+<div class="well" style="margin-top: 20px;">
+  * Barang akan otomatis bertambah jika klik "simpan"
+</div>
 </div>
 </div>
 
@@ -136,9 +132,8 @@
           $('#tambahHarga').prop('disabled',false);
         }else{
           tambahList(purchase_number, result);
-            // console.log(result);
-          }
-        })
+        }
+      })
       .fail();
     }
   });
@@ -199,6 +194,7 @@
       supplier_name: '{{ $datadetail->supplier->name }}',
       product_id: $('#purchaseBarcode').data('id'),
       product_name: $('#purchaseBarcode').data('name'),
+      barcode : $('#purchaseBarcode').val(),
       type: '{{$datadetail->type}}',
       pnumber: '{{$datadetail->purchase_number}}',
       url: '/supplierprice',
