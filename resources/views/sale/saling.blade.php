@@ -36,6 +36,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2 class="text-right" id="grandTotal">Total: {{ $datadetail->total }}</h2>
+      <div class="divider"></div>
       <h3 class="">No : {{ $datadetail->sale_number }}</h3>
       <p>Customer : {{ $datadetail->customer->name }}</p>
       <p>Type : {{ $datadetail->type }}</p>
@@ -62,18 +63,25 @@
     </div>
     <div class="col-md-4">
       <button id="hapusItem" class="btn btn-danger btn-block" {{$dtstatus}}>
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> HAPUS
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
+        HAPUS
       </button>
     </div>
     <div class="col-md-4">
      <button id="simpanPembelian" class="btn btn-success btn-block" {{$dtstatus}}>
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> SELESAI
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 
+      SELESAI
     </button>
   </div>
 </div>
 <div class="well" style="margin-top: 20px;">
   * Barang akan otomatis berkurang jika klik "simpan"
 </div>
+<a href="{{ url('sale') }}" class="btn btn-default btn-block" style="margin-top: 15px; color: #636b6f; border-bottom: 5px solid #F4645F;">
+ <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
+ KEMBALI
+</a>
+
 </div>
 </div>
 
@@ -103,6 +111,7 @@
       $('#saleBarcode').attr('data-id', $(this).attr("data-product"));
       $('#saleBarcode').attr('data-name', $(this).find("td[name='no']").text());
       $('#qty').focus();
+      cek_fieldbarcode();
     }else{
       showModalInfo('Penjualan Ini Sudah Selesai!!')
     }

@@ -9,13 +9,13 @@
 	<title>Inventory_mod</title>
 	<link rel="stylesheet" href="{{ url('css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
 	<link rel="stylesheet" href="{{ url('css/style.css') }}">
+	<link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
 	{{-- <link rel="stylesheet" href="{{ url('css/dataTables.bootstrap.css') }}"> --}}
 	<script src="{{ url('js/jquery-3.1.1.min.js') }}"></script>
-	<script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ url('js/select2.min.js') }}"></script>
 	<script src="{{ url('js/bootstrap.min.js') }}"></script>
+	<script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ url('js/dataTables.bootstrap.js') }}"></script>
 
 	{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
@@ -226,7 +226,7 @@
 
 	header{
 		border-top: 11px solid #F4645F;
-		background: transparent;
+		background-color: #F9F9F9;
 		width: 100%;
 		padding: 20px;
 		padding-right: 90px;
@@ -300,6 +300,7 @@
 		position: relative;
 		min-height: calc(100vh - 193px);
 		height: 100%;
+		padding-bottom: 20px;
 	}
 
 	#master.active{
