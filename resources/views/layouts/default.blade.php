@@ -225,7 +225,7 @@
 	}
 
 	header{
-		border-top: 15px solid #555;
+		border-top: 11px solid #F4645F;
 		background: transparent;
 		width: 100%;
 		padding: 20px;
@@ -298,7 +298,7 @@
 	.main-content{
 		/*padding-top: 90px;*/
 		position: relative;
-		min-height: calc(100vh - 189px);
+		min-height: calc(100vh - 193px);
 		height: 100%;
 	}
 

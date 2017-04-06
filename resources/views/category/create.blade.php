@@ -1,8 +1,8 @@
 @extends('layouts.default')
 @section('content')
-<h1>Tambah Kategori</h1>
+<h1 class="text-center">Tambah Kategori</h1>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-4 col-md-offset-4">
 		<form action="{{ url('category') }}" method="POST">
 			{{ csrf_field() }}
 			<div class="form-group">
