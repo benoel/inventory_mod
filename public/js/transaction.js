@@ -1,4 +1,4 @@
-$('#purchaseBarcode,#qty').scannerDetection({  
+$('#purchaseBarcode, #qty').scannerDetection({  
   //https://github.com/kabachello/jQuery-Scanner-Detection
   timeBeforeScanTest: 200, // wait for the next character for upto 200ms
   avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
@@ -66,6 +66,15 @@ function addPurchaseDetail(data){
   });
 }
 
+function addSaleDetail(data){
+  return $.ajax({
+    type: "POST",
+    cache: false,
+    url: '/saledetail',
+    data: data
+  });
+}
+
 $(document).ready(function(){
   // var rows = $('#tablePurchase tbody').find('tr').length;
   // console.log(rows);
@@ -94,8 +103,8 @@ function listPurchaseDetail(data){
 function listSaleDetail(data){
   var rows = $('#tableSale tbody').find('tr').length;
   var rowsTotal = rows + 1;
-  var tot = data.price * data.quantity;
   var price = data.price.toString().replace(/\B(?=(\d{3})+\b)/g, ",");
+  var tot = data.price * data.quantity;
   var total = tot.toString().replace(/\B(?=(\d{3})+\b)/g, ",");
   // console.log(data);
   $('#tableSale tbody').append(
@@ -103,8 +112,8 @@ function listSaleDetail(data){
     '<td name="no">'+rowsTotal+'</td>'+
     '<td name="pro">'+data.productname+'</td>'+
     '<td name="pri">'+price+'</td>'+
-    '<td name="qty">'+data.quantity+'</td>'+
-    '<td name="tot" data-value="'+tot+'">'+total+'</td>'+
+    '<td name="qty">1</td>'+
+    '<td name="tot" data-value="'+tot+'">'+data.price+'</td>'+
     '</tr>'
     );
 

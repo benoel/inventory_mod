@@ -80,6 +80,7 @@ Route::get('/checkproduct/{barcode}', 'ProductController@checkproduct');
 
 
 Route::post('/saleclose', 'SaleController@close');
+Route::post('/saledetail', 'SaleDetailController@store');
 Route::get('/saledetail/{purchase_number}/{id}/delete', 'SaleDetailController@delete');
 Route::put('/saledetail', 'SaleDetailController@update');
 Route::get('/sale', 'SaleController@view');

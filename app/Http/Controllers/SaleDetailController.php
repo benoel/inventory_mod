@@ -10,7 +10,7 @@ class SaleDetailController extends Controller
   function store(Request $request)
   {
     SaleDetail::create([
-      'Sale_number' => $request->purNumber,
+      'Sale_number' => $request->salNumber,
       'product_id' => $request->proId,
       'price' => $request->price,
       'total' => $request->price,

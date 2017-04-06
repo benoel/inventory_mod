@@ -95,16 +95,23 @@ class ProductController extends Controller
 	function checkproduct($barcode){
 		$product = Product::where('barcode', $barcode)->first();
 		if ($product != null) {
-			$productid = $product->id;
-			$productname = $product->name;
-			$price = $product->price_sale;
+			if ($product->stock != 0) {
+				$productid = $product->id;
+				$productname = $product->name;
+				$price = $product->price_sale;
+				$stock = $product->stock;
+				$barcode = $product->barcode;
 
-			return response(compact(
-				'productid',
-				'productname',
-				'price'
-				));
-
+				return response(compact(
+					'productid',
+					'productname',
+					'price',
+					'stock',
+					'barcode'
+					));
+			}else{
+				return "nostock";
+			}
 		}else{
 			return 'noproduct';
 		}

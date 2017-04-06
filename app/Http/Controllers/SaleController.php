@@ -205,7 +205,7 @@ class SaleController extends Controller
 		foreach ($request->rows as $key) {
 			$dtproduct = Product::find($key['productid']);
 			$dtproduct->update([
-				'stock' => $dtproduct->stock + $key['quantity'],
+				'stock' => $dtproduct->stock - $key['quantity'],
 				]);
 			$grandTotal += $key['total'];
 		}

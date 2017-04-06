@@ -74,8 +74,8 @@
       url: '/purchaseproduct',
       data: dt,
     }).done(function(result){
-        listPurchaseDetail(addlist)
-        $('#tambahProduct').prop('disabled',true);
+      listPurchaseDetail(addlist)
+      $('#tambahProduct').prop('disabled',true);
     }).fail(function(error){});
 
     $('#modalForm').modal('hide');
