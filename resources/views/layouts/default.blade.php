@@ -17,6 +17,9 @@
 	<script src="{{ url('js/bootstrap.min.js') }}"></script>
 	<script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ url('js/dataTables.bootstrap.js') }}"></script>
+	{{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
+	{{-- <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300" rel="stylesheet"> --}}
+
 
 	{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
 	<!-- Optional theme -->
@@ -34,38 +37,38 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script> --}}
 	<script src="{{ url('js/jquery.scannerdetection.js') }}"></script>
+
+	{{-- core style --}}
 	<style>
+		@font-face {
+			font-family: libreFranklin;
+			src: url({{ asset('Libre_Franklin/LibreFranklin-Light.ttf') }});
+		}
+
 		body{
 			background-color: #F5F8FA;
 			color: #636b6f;
-			font-family: 'Raleway', sans-serif;
-			font-weight: 100;
+			font-family: libreFranklin;
+		}
+
+		.main-content{
+			/*padding-top: 90px;*/
+			position: relative;
+			min-height: calc(100vh - 193px);
+			height: 100%;
+			padding-bottom: 20px;
+		}
+
+		#master.active{
+			color: #F4645F;
 		}
 	</style>
+
+
 </head>
 <body>
 	
-	<header>
-		<div class="brand"><a href="{{ url('/') }}">Inventory Mod</a></div>
-		<ul class="navq">
-			<li><a href="{{ url('sale/create') }}">PENJUALAN</a></li>
-			<li><a href="{{ url('purchase/create') }}">PEMBELIAN</a></li>
-			<li>
-				<a href="#" id="master">MASTER</a>
-				<div class="dropdown-field">
-					<ul class="dropdown-list">
-						<li><a href="{{ url('sale') }}">List Penjualan</a></li>
-						<li><a href="{{ url('purchases') }}">List Pembelian</a></li>
-						<li><a href="{{ url('product') }}">Barang</a></li>
-						<li><a href="{{ url('category') }}">Kategory</a></li>
-						<li><a href="{{ url('supplier') }}">Supllier</a></li>
-						<li><a href="{{ url('customer') }}">Customer</a></li>
-					</ul>
-				</div>
-			</li>
-		</ul>
-		<div class="line"></div>
-	</header>
+	@include('elements.header')
 
 	{{-- <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -202,112 +205,13 @@
 	</div>
 </div>
 
-<div class="footer">
-	<div class="description-footer text-center">COPYRIGHT © Inventory</div>
-</div>
+@include('elements.footer')
 
 <script src="{{ url('js/typeahead.bundle.js') }}"></script>
 <script src="{{ url('js/transaction.js') }}"></script>
 
 </body>
 </html>
-<style>
-	
-	.footer{
-		background-color: #F9F9F9;
-		height: 85px;
-		width: 100%;
-	}
-	.description-footer{
-		padding: 28px;
-		color: #B3B3B3;
-		font-size: 17px;
-	}
-
-	header{
-		border-top: 11px solid #F4645F;
-		background-color: #F9F9F9;
-		width: 100%;
-		padding: 20px;
-		padding-right: 90px;
-		margin-bottom: 20px;
-		height: 88px;
-		border-bottom: 1px solid #dee0df;
-	}
-
-
-	header .brand a{
-		float: left;
-		font-size: 21px;
-		color: #555;
-		margin-left: 95px;
-		font-weight: bold;
-	}
-	header ul{
-		padding: 10px;
-	}
-	header .navq{
-		float: right;
-	}
-
-	header .navq li{
-		list-style: none;
-		display: inline-block;
-		/*overflow: hidden;*/
-		margin: 0 15px;
-	}
-	header .navq li a{
-		padding: 0 20px;
-	}
-	header .navq li a, header .dropdown-list a{
-		color: #555;
-		text-decoration: none;
-	}
-
-	header .dropdown-field{
-		display: none;
-		background-color: #fff;
-		position: absolute;
-		margin-top: 27px;
-		border: 1px solid rgba(0,0,0,.15);
-		border-radius: 4px;
-		box-shadow: 0 6px 12px rgba(0,0,0,.175);
-		background-clip: padding-box;
-		z-index: 99;
-	}
-	header .dropdown-field.show{
-		display: block;
-	}
-
-	.dropdown-list{
-		padding: 10px 0px;
-	}
-
-	header .dropdown-list li{
-		display: list-item;
-		margin: 0;
-	}
-	header .dropdown-list li a:hover{
-		background-color: #f5f5f5;
-	}
-
-	header .dropdown-list li a{
-		padding: 5px 16px;
-		display: block;
-	}
-	.main-content{
-		/*padding-top: 90px;*/
-		position: relative;
-		min-height: calc(100vh - 193px);
-		height: 100%;
-		padding-bottom: 20px;
-	}
-
-	#master.active{
-		color: #F4645F;
-	}
-
-</style>	
 
 <script>
 	$(document).ready(function(){
