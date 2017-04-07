@@ -1,45 +1,59 @@
 <div class="container-fluid">
-<form id="productSupplierForm" action="{{ url('supplierprice') }}" method="POST">
-  {{ csrf_field() }}
-  <input name="sid" type="hidden" class="form-control" id="sid">
-  <input name="proId" type="hidden" class="form-control" id="proId">
-  <input name="barcode" type="hidden" class="form-control" id="inputBarcode">
-  <input name="purNumber" type="hidden" class="form-control" id="purNumber">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <label for="1">Nama Supplier</label>
-        <input name="supplier_name" type="text" class="form-control" id="_supplier" disabled="disabled">
+  <form id="productSupplierForm" action="{{ url('supplierprice') }}" method="POST">
+    {{ csrf_field() }}
+    <input name="sid" type="hidden" class="form-control" id="sid">
+    <input name="proId" type="hidden" class="form-control" id="proId">
+    <input name="barcode" type="hidden" class="form-control" id="inputBarcode">
+    <input name="purNumber" type="hidden" class="form-control" id="purNumber">
+    <div class="row">
+      {{-- <div class="col-md-12">
+        <div class="form-group">
+          <label for="1">Nama Supplier</label>
+          <input name="supplier_name" type="text" class="form-control" id="_supplier" disabled="disabled">
+        </div>
       </div>
-    </div>
-    <div class="col-md-12">
-      <div class="form-group">
-        <label for="2">Nama Barang</label>
-        <input name="product_name" type="text" class="form-control" id="_barang" disabled="disabled">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="2">Nama Barang</label>
+          <input name="product_name" type="text" class="form-control" id="_barang" disabled="disabled">
+        </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="3">Type</label>
-        <input name="tipe" type="text" class="form-control" id="_tipe" readonly>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="3">Type</label>
+          <input name="tipe" type="text" class="form-control" id="_tipe" readonly>
+        </div>
+      </div> --}}
+      <input name="supplier_name" type="hidden" class="form-control" id="_supplier">
+      <input name="product_name" type="hidden" class="form-control" id="_barang">
+      <input name="tipe" type="hidden" class="form-control" id="_tipe">
+      <input name="qty" type="hidden" class="form-control" id="_qty">
+
+      <div class="col-md-12">
+        Tambah harga beli barang <span style="color: #F4645F; font-style: italic; font-weight: bold;" id="productName"></span> ke supplier <span style="color: #F4645F; font-style: italic; font-weight: bold;" id="supplierName"></span> dengan type beli <span style="color: #F4645F; font-style: italic; font-weight: bold;" id="tipe"></span>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="4">Harga</label>
-        <input name="price" type="text" class="form-control" id="_harga">
+
+
+      <div class="col-md-12">
+        <div class="divider"></div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="4">Qty</label>
-        <input name="qty" type="text" class="form-control" id="_qty" value="1">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="4">Harga Beli</label>
+          <input name="price" type="text" class="form-control" id="_harga">
+        </div>
       </div>
-    </div>
-  </div>  
-  <div class="divider"></div>
-  <button id="simpanHargaSupplier" type="submit" class="btn btn-primary pull-right">SIMPAN</button>
-</form>
+      {{-- <div class="col-md-4">
+        <div class="form-group">
+          <label for="4">Qty</label>
+          <input name="qty" type="text" class="form-control" id="_qty" value="1">
+        </div>
+      </div> --}}
+    </div>  
+    <div class="divider"></div>
+    <button id="simpanHargaSupplier" type="submit" class="btn btn-primary pull-right">SIMPAN</button>
+  </form>
 </div>
 
 <script>
@@ -57,7 +71,7 @@
     $.ajax({
       type: "POST",
       cache: false,
-      url: '/supplierprice',
+      url: '{{ url('supplierprice') }}',
       data: dt,
     }).done(function(result){
       // addPurchaseDetail(dt).done(function(result){
@@ -67,7 +81,10 @@
     }).fail(function(error){});
 
     $('#modalForm').modal('hide');
+    $('#purchaseBarcode').val('');
+    $('#purchaseBarcode').focus();
     $('#qty').val('');
-    $('#purchaseBarcode').val('').focus();
+    $('#qty').attr('disabled', true);
+    $('#hapusItem').attr('disabled', true);
   });
 </script>

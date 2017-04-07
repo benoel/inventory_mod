@@ -209,12 +209,14 @@ class PurchaseController extends Controller
 
 		$product->purchasedetails()->create([
 			'purchase_number' => $request->purNumber,
-			'quantity' => $request->stock,
+			'quantity' => $request->kuantiti,
 			'price' => $request->price_buy,
-			'total' => $request->price_buy * $request->stock
+			'total' => $request->price_buy * $request->kuantiti
 			]);
 
-		return 'success';
+		$productId = Product::where('barcode', $request->barcode)->first();
+
+		return $productId->id;
 	}
 
 	function close(Request $request)

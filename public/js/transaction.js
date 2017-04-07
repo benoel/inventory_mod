@@ -1,30 +1,30 @@
-$('#purchaseBarcode, #qty').scannerDetection({  
-  //https://github.com/kabachello/jQuery-Scanner-Detection
-  timeBeforeScanTest: 200, // wait for the next character for upto 200ms
-  avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
-  preventDefault: false,
-  endChar: [13],
-  onComplete: function(barcode, qty){
-    validScan = true;
-    $.ajax({
-      type: "GET",
-      dataType: "json",
-      cache: false,
-      url: '/product/'+barcode,
-      success: function(data){
-        for(var i in data){
-          console.log(data[i].name);
-          // console.log(data[i].name);
-          $('#purchaseBarcode').val(data[i].id).change();
-          // $('#namabarang').val(data[i].id).change();
-          $('#qty').focus();
-        }
-      }
-    })
-    .done(function(data){});
-  },
-  onError: function(string, qty) {}
-});
+// $('#purchaseBarcode, #qty').scannerDetection({  
+//   //https://github.com/kabachello/jQuery-Scanner-Detection
+//   timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+//   avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
+//   preventDefault: false,
+//   endChar: [13],
+//   onComplete: function(barcode, qty){
+//     validScan = true;
+//     $.ajax({
+//       type: "GET",
+//       dataType: "json",
+//       cache: false,
+//       url: '/product/'+barcode,
+//       success: function(data){
+//         for(var i in data){
+//           console.log(data[i].name);
+//           // console.log(data[i].name);
+//           $('#purchaseBarcode').val(data[i].id).change();
+//           // $('#namabarang').val(data[i].id).change();
+//           $('#qty').focus();
+//         }
+//       }
+//     })
+//     .done(function(data){});
+//   },
+//   onError: function(string, qty) {}
+// });
 
 $('#modalDelete').on('click','.btn-danger',function(e){
   var action = $(this).data('url');
@@ -83,8 +83,8 @@ $(document).ready(function(){
 function listPurchaseDetail(data){
   var rows = $('#tablePurchase tbody').find('tr').length;
   var rowsTotal = rows + 1;
-  var tot = data.price * data.quantity;
   var price = data.price.toString().replace(/\B(?=(\d{3})+\b)/g, ",");
+  var tot = data.price * data.quantity;
   var total = tot.toString().replace(/\B(?=(\d{3})+\b)/g, ",");
   // console.log(data);
   $('#tablePurchase tbody').append(
@@ -92,8 +92,8 @@ function listPurchaseDetail(data){
     '<td name="no">'+rowsTotal+'</td>'+
     '<td name="pro">'+data.productname+'</td>'+
     '<td name="pri">'+price+'</td>'+
-    '<td name="qty">'+data.quantity+'</td>'+
-    '<td name="tot" data-value="'+tot+'">'+total+'</td>'+
+    '<td name="qty">'+ data.quantity +'</td>'+
+    '<td name="tot" data-value="'+tot+'">'+ tot +'</td>'+
     '</tr>'
     );
 
@@ -131,18 +131,24 @@ function showModalForm(data){
     dataType: 'html',
   }).done(function(result){
     $('#modalForm').find('div.modal-body').append(result);
+    $('#modalForm').find('#_qty').val($('#qty').val());
     $('#modalForm').find('#sid').val(data.supplier_id);
     $('#modalForm').find('#purNumber').val(data.pnumber);
     $('#modalForm').find('#_tipe').val(data.type);
+    $('#modalForm').find('#tipe').text(data.type);
     $('#modalForm').find('#_supplier').val(data.supplier_name);
+    $('#modalForm').find('#supplierName').text(data.supplier_name);
     $('#modalForm').find('#inputBarcode').val(data.barcode);
+    $('#modalForm').find('#namasuplier').text('"'+data.supplier_name + '" dengan type : '+ data.type);
+    $('#modalForm').find('#_barang').focus();
 
     if(data.title == "Tambah Harga"){
       $('#modalForm').find('#proId').val(data.product_id);
       $('#modalForm').find('#_barang').val(data.product_name);
+      $('#modalForm').find('#_qty').val($('#qty').val());
+      $('#modalForm').find('#productName').text(data.product_name);
       $('#modalForm').find('#_harga').focus();
     // }else if(data.title = "Tambah Barang"){
-
     }
   });
 

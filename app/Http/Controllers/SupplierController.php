@@ -54,18 +54,18 @@ class SupplierController extends Controller
 		Supplier::find($request->sid)->products()->attach(
 			['product_id' => $request->proId],
 			[
-				'type' => $request->tipe,
-				'price' => $request->price
+			'type' => $request->tipe,
+			'price' => $request->price
 			]
-		);
+			);
 
 		PurchaseDetail::create([
-      'purchase_number' => $request->purNumber,
-      'product_id' => $request->proId,
-      'quantity' => $request->qty,
-      'price' => $request->price,
-      'total' => $request->price * $request->qty,
-    ]);
+			'purchase_number' => $request->purNumber,
+			'product_id' => $request->proId,
+			'quantity' => $request->qty,
+			'price' => $request->price,
+			'total' => $request->price * $request->qty,
+			]);
 		// dd($request);
 		return response()->json('success');
 	}

@@ -32,7 +32,7 @@
     </table>
   </div>
 </div>
-<div class="col-md-4">
+<div style="background-color: #C9C9C9;" class="col-md-4">
   <div class="row">
     <div class="col-md-12">
       <h2 class="text-right" id="grandTotal">Total: {{ $datadetail->total }}</h2>
@@ -81,6 +81,7 @@
  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
  KEMBALI
 </a>
+<br>
 
 </div>
 </div>
@@ -104,7 +105,6 @@
   }
 
   $('#tableSale tbody').on("click","tr",function(e){
-
     var status = '{{$dtstatus}}';
     if (status != 'disabled') {
       $('#saleBarcode').val($(this).attr("data-barcode"));

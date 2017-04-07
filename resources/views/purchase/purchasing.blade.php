@@ -32,7 +32,7 @@
     </table>
   </div>
 </div>
-<div class="col-md-4">
+<div style="background-color: #C9C9C9;" class="col-md-4">
   <div class="row">
     <div class="col-md-12">
       <h2 id="grandTotal" class="text-right"></h2>
@@ -97,19 +97,49 @@
 <div class="well" style="margin-top: 20px;">
   * Barang akan otomatis bertambah jika klik "simpan"
 </div>
+
+<a href="{{ url('purchases') }}" class="btn btn-default btn-block" style="margin-top: 15px; color: #636b6f; border-bottom: 5px solid #F4645F;">
+ <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
+ KEMBALI
+</a>
+<br>
+
 </div>
 </div>
 
 <script>
   $(document).ready(function(){
-    grandTotal()
+    grandTotal();
+    cek_fieldbarcode();
   });
 
+  function cek_fieldbarcode(){
+    var field = $('#purchaseBarcode').val();
+    if (field != '') {
+      $('#qty').attr('disabled', false);
+      $('#hapusItem').attr('disabled', false);
+    }else{
+      $('#qty').attr('disabled', true);
+      $('#hapusItem').attr('disabled', true);
+    }
+  }
+
   $('#tablePurchase tbody').on("click","tr",function(e){
-    $('#purchaseBarcode').val($(this).data("barcode"))
-    $('#purchaseBarcode').attr('data-id', $(this).data("product"));
-    $('#purchaseBarcode').attr('data-name', $(this).find("td[name='no']").text());
-    $('#qty').focus();
+    var status = '{{$dtstatus}}';
+    if (status != 'disabled') {
+      $('#purchaseBarcode').val($(this).data("barcode"))
+      $('#purchaseBarcode').attr('data-id', $(this).data("product"));
+      $('#purchaseBarcode').attr('data-name', $(this).find("td[name='no']").text());
+      cek_fieldbarcode();
+      $('#qty').focus();
+      // cek_fieldbarcode();
+    }else{
+      showModalInfo('Penjualan Ini Sudah Selesai!!')
+    }
+  });
+
+  $('#purchaseBarcode').keyup(function(event) {
+    cek_fieldbarcode();
   });
 
   $('#purchaseBarcode').keypress(function(event){
@@ -119,6 +149,37 @@
     var type = '{{$datadetail->type}}';
 
     if (event.which == 13) {
+      // event.preventDefault();
+      // productSupplier(barcode,supplier,type)
+      // .done(function(result){
+      //   if(result == 'noproduct'){
+      //     showModalInfo('Data barang tidak ditemukan, silahkan tambah data.');
+      //     $('#tambahProduct').prop('disabled',false);
+      //   }else if(result.price == ''){
+      //     showModalInfo('Harga supplier belum tersedia, silahkan buat baru.');
+      //     $('#purchaseBarcode').attr('data-id',result.productid);
+      //     $('#purchaseBarcode').attr('data-name',result.productname);
+      //     $('#tambahHarga').prop('disabled',false);
+      //   }else{
+      //     tambahList(purchase_number, result);
+      //   }
+      // })
+      // .fail();
+      cek_fieldbarcode();
+      $('#qty').val('');
+      $('#qty').focus();
+    }
+  });
+
+
+  $('#qty').keypress(function(event){
+    var purchase_number = '{{$datadetail->purchase_number}}';
+    var supplier = '{{$datadetail->supplier_id}}';
+    var barcode = $('#purchaseBarcode').val();  
+    var type = '{{$datadetail->type}}';
+
+    if (event.which == 13) {
+      cek_fieldbarcode();
       event.preventDefault();
       productSupplier(barcode,supplier,type)
       .done(function(result){
@@ -138,40 +199,40 @@
     }
   });
 
-  $('#qty').keypress(function(e){
-    var purchase_number = '{{$datadetail->purchase_number}}';
-    var barcode = $('#purchaseBarcode').val();
-    var supplier = '{{$datadetail->supplier_id}}';
-    var type = '{{$datadetail->type}}';
-    var _qty = $(this).val();
+  // $('#qty').keypress(function(e){
+  //   var purchase_number = '{{$datadetail->purchase_number}}';
+  //   var barcode = $('#purchaseBarcode').val();
+  //   var supplier = '{{$datadetail->supplier_id}}';
+  //   var type = '{{$datadetail->type}}';
+  //   var _qty = $(this).val();
 
-    if (e.which == 13) {
-      e.preventDefault();
-      productSupplier(barcode,supplier,type)
-      .done(function(result){
-        var _tr = 'tr[data-product="'+result.productid+'"]';
-        var _pri = result.price * _qty;
-        var pdEdit = {
-          purNumber: purchase_number,
-          proId: result.productid,
-          quantity: _qty,
-          price: result.price,
-          total: _pri,
-          _token: "{{csrf_token()}}"
-        };
-        
-        editPurchaseDetail(pdEdit)
-        .done(function(result){
-          $(_tr).find('td[name="qty"]').text(_qty);
-          $(_tr).find('td[name="tot"]').attr("data-value",_pri);
-          $(_tr).find('td[name="tot"]').text(_pri.toString().replace(/\B(?=(\d{3})+\b)/g, ","));
-          grandTotal()
-          $('#qty').val('');
-          $('#purchaseBarcode').val('').focus();
-        }).fail(function(result){});
-      });
-    }
-  });
+  //   if (e.which == 13) {
+  //     e.preventDefault();
+  //     productSupplier(barcode,supplier,type)
+  //     .done(function(result){
+  //       var _tr = 'tr[data-product="'+result.productid+'"]';
+  //       var _pri = result.price * _qty;
+  //       var pdEdit = {
+  //         purNumber: purchase_number,
+  //         proId: result.productid,
+  //         quantity: _qty,
+  //         price: result.price,
+  //         total: _pri,
+  //         _token: "{{csrf_token()}}"
+  //       };
+
+  //       editPurchaseDetail(pdEdit)
+  //       .done(function(result){
+  //         $(_tr).find('td[name="qty"]').text(_qty);
+  //         $(_tr).find('td[name="tot"]').attr("data-value",_pri);
+  //         $(_tr).find('td[name="tot"]').text(_pri.toString().replace(/\B(?=(\d{3})+\b)/g, ","));
+  //         grandTotal()
+  //         $('#qty').val('');
+  //         $('#purchaseBarcode').val('').focus();
+  //       }).fail(function(result){});
+  //     });
+  //   }
+  // });
 
   $('#tambahProduct').click(function(e){
     e.preventDefault();
@@ -250,7 +311,8 @@
     if(exist.length == 1){
       var qty = $(_tr).find('td[name="qty"]');
       var pri = $(_tr).find('td[name="pri"]');
-      var _qty = parseInt(qty.text()) + 1;
+      // var _qty = parseInt(qty.text()) + 1;
+      var _qty = $('#qty').val();
       var _pri = data.price * _qty;
       var pdEdit = {
         purNumber: purchase_number,
@@ -267,6 +329,11 @@
         $(_tr).find('td[name="tot"]').attr("data-value",_pri);
         $(_tr).find('td[name="tot"]').text(_pri.toString().replace(/\B(?=(\d{3})+\b)/g, ","));
         grandTotal()
+        cek_fieldbarcode();
+        $('#qty').val('');
+        $('#purchaseBarcode').val('');
+        $('#purchaseBarcode').focus();
+        cek_fieldbarcode();
       }).fail(function(result){});
     }else{
       var price = data.price.toString().replace(/\B(?=(\d{3})+\b)/g, ",");
@@ -283,6 +350,7 @@
         console.log(data);
       }).fail();
     }
+    cek_fieldbarcode();
     $('#qty').focus();
   }
 </script>
