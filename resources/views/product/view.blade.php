@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-
+<br>
 <a href="{{ url('product/create') }}" class="btn btn-default">Tambah Product</a>
 
 <table id="inventoryTable" class="display">

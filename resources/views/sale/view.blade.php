@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+<br>
 <a href="{{ url('sale/create') }}" class="btn btn-default">Input Penjualan</a>
 
 <table id="inventoryTable" class="display">

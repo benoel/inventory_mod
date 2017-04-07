@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+<br>
 <a href="{{ url('category/create') }}" class="btn btn-default">Tambah Kategori Barang</a>
 
 <table id="inventoryTable" class="display">
