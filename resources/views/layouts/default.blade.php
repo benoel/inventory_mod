@@ -54,7 +54,7 @@
 		.main-content{
 			/*padding-top: 90px;*/
 			position: relative;
-			min-height: calc(100vh - 193px);
+			min-height: calc(100vh - 173px);
 			height: 100%;
 			padding-bottom: 20px;
 		}
