@@ -91,6 +91,24 @@ Route::get('/sale/{sale_number}', 'SaleController@saledetail');
 Route::get('/sale/{id}/delete', 'SaleController@delete');
 // Route::get('/sale/{id}/detail', 'SaleController@saledetail');
 
+// untuk print
+Route::get('/printsale/{salenumber}', 'SaleController@previewsale');
+Route::get('/printpurchase/{purchasenumber}', 'PurchaseController@previewsale');
+// untuk print
+
+// report
+Route::get('/purchasereport', function(){
+	return view('purchase.purchasereport');
+});
+Route::post('/purchasereport', 'PurchaseController@purchasereport');
+
+Route::get('/salereport', function(){
+	return view('sale.salereport');
+});
+Route::post('/salereport', 'SaleController@salereport');
+
+// report
+
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');
 Route::get('/tabledetailpembelian', 'PurchaseController@table');

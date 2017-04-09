@@ -57,3 +57,7 @@ nav.navbar.navbar-default{
 		cursor: pointer;
 	}
 
+	.hidden{
+		display: none;
+	}
+

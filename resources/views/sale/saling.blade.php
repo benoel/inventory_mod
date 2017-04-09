@@ -77,10 +77,22 @@
 <div class="well" style="margin-top: 20px;">
   * Barang akan otomatis berkurang jika klik "simpan"
 </div>
-<a href="{{ url('sale') }}" class="btn btn-default btn-block" style="margin-top: 15px; color: #636b6f; border-bottom: 5px solid #F4645F;">
- <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
- KEMBALI
-</a>
+<div class="row">
+  <div class="col-md-{{ $dtstatus =='disabled' ? '6' : '12'}} ">
+    <a href="{{ url('sale') }}" class="btn btn-default btn-block" style="margin-top: 15px; color: #636b6f; border-bottom: 5px solid #F4645F;">
+     <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
+     KEMBALI
+   </a>
+ </div>
+ <div class="{{ $dtstatus=='disabled' ? 'col-md-6' : 'hidden'}} ">
+   <a href="#" id="print" class="btn btn-default btn-block" style="margin-top: 15px; color: #636b6f; border-bottom: 5px solid #5CB85C;">
+     {{-- <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>  --}}
+     PREVIEW DAN PRINT
+   </a>
+ </div>
+</div>
+
+
 <br>
 
 </div>
@@ -291,7 +303,15 @@
     $('#saleBarcode').focus();
     cek_fieldbarcode();
   }
+  $('#print').click(function(event) {
+    /* Act on the event */
+    event.preventDefault();
+    popup_print();
+  });
 
+  function popup_print(){
+    window.open('{{ url("printsale") }}/{{ $datadetail->sale_number }}','page','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=750,height=600,left=50,top=50,titlebar=yes')
+  }
 
 </script>
 @endsection

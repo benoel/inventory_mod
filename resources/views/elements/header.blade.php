@@ -3,16 +3,28 @@
 	<ul class="navq">
 		<li><a href="{{ url('sale/create') }}">PENJUALAN</a></li>
 		<li><a href="{{ url('purchase/create') }}">PEMBELIAN</a></li>
-		<li>
-			<a href="#" id="master">MASTER</a>
+		<li id="master">
+			<a href="#" id="toggle">MASTER</a>
 			<div class="dropdown-field">
 				<ul class="dropdown-list">
 					<li><a href="{{ url('sale') }}">List Penjualan</a></li>
 					<li><a href="{{ url('purchases') }}">List Pembelian</a></li>
+					<div class="divider"></div>
 					<li><a href="{{ url('product') }}">Barang</a></li>
 					<li><a href="{{ url('category') }}">Kategory</a></li>
+					<div class="divider"></div>
 					<li><a href="{{ url('supplier') }}">Supllier</a></li>
 					<li><a href="{{ url('customer') }}">Customer</a></li>
+				</ul>
+			</div>
+		</li>
+		<li id="laporan">
+			<a href="#" id="toggle">LAPORAN</a>
+			<div class="dropdown-field">
+				<ul class="dropdown-list">
+					<li><a href="{{ url('salereport') }}">Laporan Penjualan</a></li>
+					<li><a href="{{ url('purchasereport') }}">Laporan Pembelian</a></li>
+					
 				</ul>
 			</div>
 		</li>
@@ -92,4 +104,56 @@
 		padding: 5px 16px;
 		display: block;
 	}
+
+	#toggle.active{
+		color: #F4645F;
+	}
 </style>
+
+<script>
+	$(document).ready(function(){
+
+
+		$('#master').click(function(e) {
+			// e.preventDefault();
+			$(this).find('#toggle').toggleClass('active');
+			$(this).find('.dropdown-field').toggleClass('show');
+			var laporan = $('#laporan').find('#toggle').hasClass('active');
+			if (laporan == true) {
+				$('#master').find('#toggle').addClass('active');
+				$('#master').find('.dropdown-field').addClass('show');
+				$('#laporan').find('#toggle').removeClass('active');
+				$('#laporan').find('.dropdown-field').removeClass('show');
+			}
+		});
+
+		$('#laporan').click(function(e) {
+			// e.preventDefault();
+			$(this).find('#toggle').toggleClass('active');
+			$(this).find('.dropdown-field').toggleClass('show');
+			var master = $('#master').find('#toggle').hasClass('active');
+			if (master == true) {
+				$('#master').find('#toggle').removeClass('active');
+				$('#master').find('.dropdown-field').removeClass('show');
+				$('#laporan').find('#toggle').addClass('active');
+				$('#laporan').find('.dropdown-field').addClass('show');
+
+			}
+		});
+
+		$('.main-content, .footer').click(function(event) {
+			/* Act on the event */
+			var a = $('.dropdown-field').hasClass('show');
+			if (a == true) {
+				$('#master, #laporan').find('#toggle').removeClass('active');
+				$('.dropdown-field').removeClass('show');
+			}
+		});
+
+		
+
+
+
+	})
+	
+</script>

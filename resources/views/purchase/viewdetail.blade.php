@@ -1,6 +1,6 @@
-@extends('layouts.default')
+@extends('layouts.printpreview')
 @section('content')
-<h1>Detail Pembelian</h1>
+<h1 class="text-center">Detail Pembelian</h1>
 @foreach ($datadetail as $dtdetail)
 <div class="invoice-box">
 	<table cellpadding="0" cellspacing="0">
@@ -13,7 +13,7 @@
 						</td>
 
 						<td>
-							Nomor Penjualan #: {{ $salenumber }}<br>
+							Nomor Penjualan #: {{ $purchasenumber }}<br>
 							Created: {{ $dtdetail->created_at }}<br>
 						</td>
 					</tr>
@@ -95,7 +95,7 @@
 			<td></td>
 
 			<td>
-				Total: Rp. {{ $element->sum('total') }}
+				Total: Rp. {{ $dtdetail->total_price }}
 			</td>
 		</tr>
 		{{-- <tr>
@@ -109,8 +109,20 @@
 @endforeach
 <br>
 <div class="text-center">
-	<a href="{{ url('sale') }}" class="btn btn-default">Kembali</a>
+	{{-- <a href="{{ url('sale') }}" class="btn btn-default">Kembali</a> --}}
+	<a href="#" id="printThis" class="btn btn-default">PRINT</a>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$('#printThis').click(function(e){
+			e.preventDefault();
+			$(this).hide();
+			window.print();
+			$(this).show();
+		})
+	})
+</script>
 
 
 <style>

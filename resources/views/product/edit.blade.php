@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-<h1>Edit product</h1>
+<h1 class="text-center">Edit product</h1>
 <div class="row">
 	<div class="col-md-6">
 		<form action="{{ url('product/'. $data->id .'') }}" method="POST">

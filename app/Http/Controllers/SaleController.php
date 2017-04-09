@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\DB;
 use App\Sale;
 use App\Customer;
 use App\Product;
@@ -215,6 +214,27 @@ class SaleController extends Controller
 			'total_price' => $grandTotal,
 			]);
 		return 'success';
+	}
+
+	function previewsale($sale_number){
+		$datadetail = Sale::where('sale_number', $sale_number)->get();
+		$salenumber = $sale_number;
+		$databarang = SaleDetail::where('sale_number', $sale_number)->get();
+
+		return view('sale.viewdetail', compact('datadetail', 'salenumber', 'databarang'));
+		
+	}
+
+	function salereport(Request $request){
+ 		// return $request->from.' 00:00:00';
+		$datareport = Sale::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
+		$from = $request->from;
+		$to = $request->to;
+		return view('sale.reportresult', compact('datareport', 'from', 'to'));
+		// foreach ($datareport as $key) {
+		// 	return $key->sum('total_price');
+		// }
+
 	}
 
 }

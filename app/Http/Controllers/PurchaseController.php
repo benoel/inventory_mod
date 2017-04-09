@@ -10,6 +10,7 @@ use App\Purchase;
 use App\Supplier;
 use App\Product;
 use App\PurchaseDetailProduct;
+use App\PurchaseDetail;
 
 
 class PurchaseController extends Controller
@@ -240,6 +241,27 @@ class PurchaseController extends Controller
   	// return response()->json($grandTotal);
 		return 'success';
 	}
+
+	function previewsale($purchase_number){
+		$datadetail = Purchase::where('purchase_number', $purchase_number)->get();
+		$purchasenumber = $purchase_number;
+		$databarang = PurchaseDetail::where('purchase_number', $purchase_number)->get();
+
+		return view('purchase.viewdetail', compact('datadetail', 'purchasenumber', 'databarang'));
+		
+	}
+
+	function purchasereport(Request $request){
+		$datareport = Purchase::whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59'])->get();
+		
+		$from = $request->from;
+		$to = $request->to;
+
+		return view('purchase.reportresult', compact('datareport', 'from', 'to'));
+	}
+
+
+
 }
 
 

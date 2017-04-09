@@ -11,12 +11,14 @@
 	<link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ url('css/style.css') }}">
 	<link rel="stylesheet" href="{{ url('css/jquery.dataTables.min.css') }}">
+	<link rel="stylesheet" href="{{ url('css/bootstrap-datepicker.min.css') }}">
 	{{-- <link rel="stylesheet" href="{{ url('css/dataTables.bootstrap.css') }}"> --}}
 	<script src="{{ url('js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ url('js/select2.min.js') }}"></script>
 	<script src="{{ url('js/bootstrap.min.js') }}"></script>
 	<script src="{{ url('js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ url('js/dataTables.bootstrap.js') }}"></script>
+	<script src="{{ url('js/bootstrap-datepicker.min.js') }}"></script>
 	{{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
 	{{-- <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300" rel="stylesheet"> --}}
 
@@ -58,10 +60,6 @@
 			height: 100%;
 			padding-bottom: 20px;
 		}
-
-		#master.active{
-			color: #F4645F;
-		}
 	</style>
 
 
@@ -70,95 +68,31 @@
 	
 	@include('elements.header')
 
-	{{-- <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="{{ url('/') }}">Inventory MOD</a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="{{ url('purchase/create') }}" id="createPurchase">
-							<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Pembelian
-						</a>
-					</li>
-					<li>
-						<a href="{{url('sale/create')}}">
-							<span class="glyphicon glyphicon-export" aria-hidden="true"></span> Penjualan
-						</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" 
-						class="dropdown-toggle" 
-						data-toggle="dropdown" 
-						role="button" 
-						aria-haspopup="true" 
-						aria-expanded="false"
-						><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Master <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="{{url('purchases')}}">List Pembelian</a></li>
-						<li><a href="{{url('sale')}}">List Penjualan</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="{{url('product')}}">Barang</a></li>
-						<li><a href="{{url('category')}}">Kategori</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="{{url('supplier')}}">Supplier</a></li>
-						<li><a href="{{url('customer')}}">Customer</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div><!-- /.container-fluid -->
-</nav> --}}
-{{-- <ul class="sidenav">
-	<li>Transaksi
-		<ul>
-			<li><a href="{{ url('purchase') }}">Pembelian</a></li>
-			<li><a href="{{ url('sale') }}">Penjualan</a></li>
-		</ul>
-	</li>
-	<li>Master
-		<ul>
-			<li><a href="{{ url('product') }}">Barang</a></li>
-			<li><a href="{{ url('supplier') }}">Supplier</a></li>
-			<li><a href="{{ url('customer') }}">Customer</a></li>
-			<li><a href="{{ url('category') }}">Kategori</a></li>
-		</ul>
-	</li>
-</ul> --}}
 
-<div class="main-content container-fluid">
-	@yield('content')
-</div>
+	<div class="main-content container-fluid">
+		@yield('content')
+	</div>
 
-<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-sm" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Oops...!</h4>
-			</div>
-			<div class="modal-body"><p></p></div>
-			<div class="modal-footer">
-				<button id="closeModalInfo" type="button" class="btn btn-primary" data-dismiss="modal">OKE</button>
+	<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Oops...!</h4>
+				</div>
+				<div class="modal-body"><p></p></div>
+				<div class="modal-footer">
+					<button id="closeModalInfo" type="button" class="btn btn-primary" data-dismiss="modal">OKE</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="modalPage" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
+	<div class="modal fade" id="modalPage" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
 			{{-- <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -213,22 +147,4 @@
 </body>
 </html>
 
-<script>
-	$(document).ready(function(){
-		$('#master').click(function(e) {
-			e.preventDefault();
-			$(this).toggleClass('active');
-			/* Stuff to do when the mouse enters the element */
-			$('.dropdown-field').toggleClass('show');
-		});
-		$('.main-content').click(function(event) {
-			/* Act on the event */
-			var a = $('.dropdown-field').hasClass('show');
-			if (a == true) {
-				$('#master').removeClass('active');
-				$('.dropdown-field').removeClass('show');
-			}
-		});
-	})
-	
-</script>
+
