@@ -15,7 +15,13 @@
 			</div>
 			<div class="form-group">
 				<label for="2">Unit</label>
-				<input name="unit" type="text" class="form-control" id="2" placeholder="Unit">
+				<select class="form-control" id="2" name="unit">
+					<option disabled selected></option>
+					<option value="pcs">pcs</option>
+					<option value="box">box</option>
+					<option value="dus">dus</option>
+					<option value="karton">karton</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label for="3">Stock</label>
@@ -29,8 +35,9 @@
 				<label for="5">Harga Beli</label>
 				<input name="price_buy" type="text" class="form-control" id="5" placeholder="Harga Beli">
 			</div>
-			<select class="form-control" name="category_id">
-				<option disabled selected>Pilih Kategory</option>
+			<label for="cat">Katagory</label>
+			<select class="form-control" id="cat" name="category_id">
+				<option disabled selected></option>
 				@foreach ($category as $element)
 				<option value="{{ $element->id }}">{{ $element->name }}</option>
 				@endforeach

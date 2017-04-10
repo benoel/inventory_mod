@@ -39,6 +39,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script> --}}
 	<script src="{{ url('js/jquery.scannerdetection.js') }}"></script>
+	{{-- <script src="{{ url('js/myjs.js') }}"></script> --}}
 
 	{{-- core style --}}
 	<style>

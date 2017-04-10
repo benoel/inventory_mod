@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+<h1 class="text-center">Pembelian</h1>
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<form id="simpanPembelianForm" action="POST">
