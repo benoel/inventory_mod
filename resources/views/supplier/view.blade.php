@@ -21,7 +21,7 @@
 			<td>{{ $data->address }}</td>
 			<td>{{ $data->phone }}</td>
 			<td>{{ $data->detail=='' ? '-' : $sata->detail }}</td>
-			<td><a href="{{ url('supplier/'. $data->id .'/edit') }}">Edit</a> || <a href="{{ url('supplier/'. $data->id .'/delete') }}">Delete</a> </td>
+			<td><a class="mycolor" href="{{ url('supplier/'. $data->id .'/edit') }}">Edit</a> || <a class="mycolor" href="{{ url('supplier/'. $data->id .'/delete') }}">Delete</a> </td>
 		</tr>
 		@endforeach
 	</tbody>

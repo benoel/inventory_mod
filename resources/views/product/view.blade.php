@@ -28,7 +28,9 @@
 			<td>{{ $data->price_sale }}</td>
 			<td>{{ $data->price_buy }}</td>
 			<td>
-				<a href="{{ url('product/'. $data->id .'/edit') }}">Edit</a> || <a href="{{ url('product/'. $data->id .'/delete') }}">Delete</a> 
+				<a class="mycolor" href="{{ url('product/'. $data->id .'/edit') }}">Edit</a> || 
+				<a class="mycolor" href="{{ url('product/'. $data->id .'/delete') }}">Delete</a> || 
+				<a class="mycolor" href="{{ url('product/'. $data->id .'/reject') }}">Reject</a> 
 			</td>
 		</tr>
 		@endforeach

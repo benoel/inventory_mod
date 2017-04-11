@@ -107,7 +107,18 @@ Route::get('/salereport', function(){
 });
 Route::post('/salereport', 'SaleController@salereport');
 
+Route::get('/rejectreport', function(){
+	return view('reject.rejectreport');
+});
+Route::post('/rejectreport', 'RejectController@rejectreport');
 // report
+
+//reject
+Route::get('/reject', 'RejectController@view');
+Route::get('/product/{idproduct}/reject', 'RejectController@create');
+Route::post('/reject', 'RejectController@store');
+Route::get('/reject/{idreject}/return', 'RejectController@return_barang');
+
 
 Route::get('/databarang/{idbarang}/{idsupplier}/{type}', 'PurchaseController@databarang');
 Route::post('/tambahdetailpembelian', 'PurchaseController@tambahdetail');

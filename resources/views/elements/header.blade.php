@@ -15,6 +15,8 @@
 					<div class="divider"></div>
 					<li><a href="{{ url('supplier') }}">Supllier</a></li>
 					<li><a href="{{ url('customer') }}">Customer</a></li>
+					<div class="divider"></div>
+					<li><a href="{{ url('reject') }}">Barang Reject</a></li>
 				</ul>
 			</div>
 		</li>
@@ -24,6 +26,8 @@
 				<ul class="dropdown-list">
 					<li><a href="{{ url('salereport') }}">Laporan Penjualan</a></li>
 					<li><a href="{{ url('purchasereport') }}">Laporan Pembelian</a></li>
+					<div class="divider"></div>
+					<li><a href="{{ url('rejectreport') }}">Laporan Barang Reject</a></li>
 					
 				</ul>
 			</div>

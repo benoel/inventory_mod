@@ -17,7 +17,7 @@
 		<tr>
 			<td>{{ $data->name }}</td>
 			<td>{{ $data->description=='' ? '-' : $data->description }}</td>
-			<td><a href="{{ url('category/'. $data->id .'/edit') }}">Edit</a> || <a href="{{ url('category/'. $data->id .'/delete') }}">Delete</a> </td>
+			<td><a class="mycolor" href="{{ url('category/'. $data->id .'/edit') }}">Edit</a> || <a class="mycolor" href="{{ url('category/'. $data->id .'/delete') }}">Delete</a> </td>
 		</tr>
 		@endforeach
 	</tbody>

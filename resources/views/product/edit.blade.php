@@ -2,7 +2,7 @@
 @section('content')
 <h1 class="text-center">Edit product</h1>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-4 col-md-offset-4">
 		<form action="{{ url('product/'. $data->id .'') }}" method="POST">
 			{{ csrf_field() }}
 			<input type="hidden" name="_method" value="PUT">

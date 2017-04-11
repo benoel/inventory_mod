@@ -61,3 +61,8 @@ nav.navbar.navbar-default{
 		display: none;
 	}
 
+	.mycolor{
+		color: #F4645F;
+		font-weight: bold;
+	}
+
